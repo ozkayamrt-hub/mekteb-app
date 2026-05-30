@@ -1,27 +1,27 @@
-'use client'
-
-import { useState } from 'react'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 
-export default function GirisPage() {
-  const router = useRouter()
-  const supabase = createClient()
-  const [email, setEmail]       = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading]   = useState(false)
-  const [error, setError]       = useState<string | null>(null)
+export default async function GirisPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>
+}) {
+  const { error } = await searchParams
 
-  async function handleLogin(e: React.FormEvent) {
-    e.preventDefault()
-    setLoading(true); setError(null)
+  async function login(formData: FormData) {
+    'use server'
+    const email    = formData.get('email') as string
+    const password = formData.get('password') as string
 
+    const supabase = await createClient()
     const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) { setError(error.message); setLoading(false); return }
 
-    router.push('/panel')
-    router.refresh()
+    if (error) {
+      redirect('/giris?error=' + encodeURIComponent(error.message))
+    }
+
+    redirect('/panel')
   }
 
   return (
@@ -37,36 +37,35 @@ export default function GirisPage() {
             <h2 style={{ fontSize:'1.8rem', fontWeight:400 }}>Hoş <em style={{ fontStyle:'italic', color:'var(--gold)' }}>geldiniz</em></h2>
           </div>
 
-          <form onSubmit={handleLogin} style={{ display:'flex', flexDirection:'column', gap:'16px' }}>
+          <form action={login} style={{ display:'flex', flexDirection:'column', gap:'16px' }}>
             <div>
               <label className="form-label">E-posta</label>
               <input
-                type="email" className="form-input"
-                value={email} onChange={e => setEmail(e.target.value)}
+                type="email" name="email"
+                className="form-input"
                 placeholder="ornek@mail.com" required
               />
             </div>
             <div>
               <label className="form-label">Şifre</label>
               <input
-                type="password" className="form-input"
-                value={password} onChange={e => setPassword(e.target.value)}
+                type="password" name="password"
+                className="form-input"
                 placeholder="••••••••" required
               />
             </div>
 
             {error && (
-              <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--red)', padding:'10px 14px', border:'1px solid rgba(201,110,110,.3)', background:'rgba(201,110,110,.06)' }}>
-                {error}
+              <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--red)', padding:'10px 14px', border:'1px solid rgba(201,110,110,.3)', background:'rgba(201,110,110,.06)' }}>
+                {decodeURIComponent(error)}
               </p>
             )}
 
             <button
               type="submit" className="btn btn-gold btn-md"
               style={{ width:'100%', justifyContent:'center', marginTop:'8px' }}
-              disabled={loading}
             >
-              {loading ? 'Giriş yapılıyor…' : 'Giriş Yap →'}
+              Giriş Yap →
             </button>
           </form>
 
