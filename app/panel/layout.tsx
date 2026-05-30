@@ -22,6 +22,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
       <PanelSidebar
         fullName={psy?.profiles?.full_name ?? user.email ?? 'Psikolog'}
         tier={(psy?.tier ?? 'aday') as import('@/types/database').Tier}
+        isAdmin={user.email === 'ozkaya.mrt@gmail.com'}
       />
       <main style={{ overflow:'auto', background:'var(--bg)' }}>
         {children}

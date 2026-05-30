@@ -22,9 +22,10 @@ const NAV = [
 interface Props {
   fullName: string
   tier: Tier
+  isAdmin?: boolean
 }
 
-export default function PanelSidebar({ fullName, tier }: Props) {
+export default function PanelSidebar({ fullName, tier, isAdmin }: Props) {
   const pathname = usePathname()
   const router   = useRouter()
   const supabase = createClient()
@@ -101,6 +102,11 @@ export default function PanelSidebar({ fullName, tier }: Props) {
 
       {/* Bottom */}
       <div style={{ padding: '16px 24px', borderTop: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        {isAdmin && (
+          <Link href="/admin" style={{ fontFamily: 'Cormorant Garant,serif', fontSize: '.85rem', color: 'var(--gold)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            ◈ Admin Paneli
+          </Link>
+        )}
         <Link href="/danisan" target="_blank" style={{ fontFamily: 'Cormorant Garant,serif', fontSize: '.85rem', color: 'var(--muted)', textDecoration: 'none' }}>
           ↗ Genel Dizin
         </Link>

@@ -21,6 +21,8 @@ export default async function GirisPage({
       redirect('/giris?error=' + encodeURIComponent(error.message))
     }
 
+    // Admin doğrudan admin paneline
+    if (email === 'ozkaya.mrt@gmail.com') redirect('/admin')
     redirect('/panel')
   }
 
