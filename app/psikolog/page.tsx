@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import FeedbackButton from '@/components/FeedbackButton'
+import PublicNavbar from '@/components/layout/PublicNavbar'
 
 const PSY_QUOTES = [
   { text: "Sevgisiz geçen çocukluk yılları, hastalıkların çoğunun kaynağıdır.", author: "Sigmund Freud", field: "Psikanaliz" },
@@ -51,23 +52,7 @@ export default function PsikologPage() {
         .tier-card:hover { transform: translateY(-5px); }
       `}</style>
 
-      {/* ── NAVBAR ── */}
-      <nav style={{ position:'fixed', top:0, left:0, right:0, zIndex:200, background:'rgba(9,15,12,.92)', backdropFilter:'blur(24px)', borderBottom:'1px solid var(--border)', padding:'14px 0' }}>
-        <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px', display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-          <Link href="/" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.6rem', fontWeight:500, color:'var(--cream)', textDecoration:'none' }}>
-            Mek<span style={{ color:'var(--gold)' }}>teb</span>
-          </Link>
-          <div style={{ display:'flex', gap:'28px', alignItems:'center' }}>
-            <a href="#neden" style={{ fontFamily:'Cormorant Garant,serif', color:'var(--text)', textDecoration:'none' }}>Neden Mekteb?</a>
-            <a href="#kademe" style={{ fontFamily:'Cormorant Garant,serif', color:'var(--text)', textDecoration:'none' }}>Kademe Sistemi</a>
-            <a href="#fiyat" style={{ fontFamily:'Cormorant Garant,serif', color:'var(--text)', textDecoration:'none' }}>Üyelik</a>
-          </div>
-          <div style={{ display:'flex', gap:'10px', alignItems:'center' }}>
-            <Link href="/" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--muted)', textDecoration:'none', padding:'8px 14px' }}>← Danışan Sayfası</Link>
-            <Link href="/kayit" className="btn btn-gold" style={{ fontSize:'.9rem', padding:'9px 22px' }}>Başvur →</Link>
-          </div>
-        </div>
-      </nav>
+      <PublicNavbar />
 
       {/* ── HERO — Psikolog ── */}
       <section style={{ minHeight:'100vh', display:'flex', alignItems:'center', paddingTop:'80px', background:'var(--bg2)', position:'relative', overflow:'hidden' }}>

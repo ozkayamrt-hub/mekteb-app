@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import FeedbackButton from '@/components/FeedbackButton'
+import PublicNavbar from '@/components/layout/PublicNavbar'
 
 const CLIENT_QUOTES = [
   { text: "İnsanlar nesnelerden değil, nesneler hakkındaki görüşlerden rahatsız olur.", author: "Epiktetos", field: "Stoacı Felsefe" },
@@ -47,26 +48,7 @@ export default function DanisanPage() {
         .hover-lift:hover { transform:translateY(-4px); }
       `}</style>
 
-      {/* ── NAVBAR ── */}
-      <nav style={{ position:'fixed', top:0, left:0, right:0, zIndex:200, background:'rgba(9,15,12,.92)', backdropFilter:'blur(24px)', borderBottom:'1px solid var(--border)', padding:'14px 0' }}>
-        <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px', display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-          <Link href="/" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.6rem', fontWeight:500, color:'var(--cream)', textDecoration:'none' }}>
-            Mek<span style={{ color:'var(--gold)' }}>teb</span>
-          </Link>
-          <div style={{ display:'flex', gap:'28px', alignItems:'center' }}>
-            <Link href="/danisan" style={{ fontFamily:'Cormorant Garant,serif', color:'var(--text)', textDecoration:'none' }}>Psikolog Bul</Link>
-            <a href="#nasil" style={{ fontFamily:'Cormorant Garant,serif', color:'var(--text)', textDecoration:'none' }}>Nasıl Çalışır?</a>
-          </div>
-          <div style={{ display:'flex', gap:'10px', alignItems:'center' }}>
-            <Link href="/giris" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--muted)', textDecoration:'none', padding:'8px 14px' }}>Giriş</Link>
-            <Link href="/psikolog" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--gold)', border:'1px solid rgba(201,169,110,.35)', padding:'8px 18px', textDecoration:'none', transition:'all .25s' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(201,169,110,.08)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = 'transparent'; }}>
-              Psikolog musunuz? →
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <PublicNavbar />
 
       {/* ── HERO — Danışan ── */}
       <section style={{ minHeight:'100vh', display:'flex', alignItems:'center', paddingTop:'80px', background:'var(--bg2)', position:'relative', overflow:'hidden' }}>
