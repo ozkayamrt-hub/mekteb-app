@@ -1,13 +1,17 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+let _resend: Resend | null = null
+function getResend() {
+  if (!_resend) _resend = new Resend(process.env.RESEND_API_KEY ?? 're_placeholder')
+  return _resend
+}
 
 const FROM = process.env.RESEND_FROM ?? 'Mekteb <onboarding@resend.dev>'
 
 export async function sendGroupApplicationEmail({
   leaderEmail, leaderName, groupTitle, applicantName,
 }: { leaderEmail: string; leaderName: string; groupTitle: string; applicantName: string }) {
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM,
     to: leaderEmail,
     subject: `Yeni başvuru: ${groupTitle}`,
@@ -30,7 +34,7 @@ export async function sendGroupApplicationEmail({
 export async function sendApplicationResultEmail({
   applicantEmail, applicantName, groupTitle, approved,
 }: { applicantEmail: string; applicantName: string; groupTitle: string; approved: boolean }) {
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM,
     to: applicantEmail,
     subject: approved ? `Başvurunuz onaylandı — ${groupTitle}` : `Başvurunuz hakkında — ${groupTitle}`,
