@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import FeedbackButton from '@/components/FeedbackButton'
 import PublicNavbar from '@/components/layout/PublicNavbar'
+import { DoveFlock, LaurelBranch, FloatingLeaves, OrnamentalDivider } from '@/components/effects/PageEffects'
 
 const PSY_QUOTES = [
   { text: "Sevgisiz geçen çocukluk yılları, hastalıkların çoğunun kaynağıdır.", author: "Sigmund Freud", field: "Psikanaliz" },
@@ -58,6 +59,12 @@ export default function PsikologPage() {
       <section style={{ minHeight:'100vh', display:'flex', alignItems:'center', paddingTop:'80px', background:'var(--bg2)', position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', top:'-10%', left:'50%', transform:'translateX(-50%)', width:'900px', height:'800px', background:'radial-gradient(ellipse,rgba(30,70,40,.45) 0%,transparent 70%)', pointerEvents:'none' }} />
 
+        {/* Sol: Güvercin sürüsü */}
+        <DoveFlock side="left" />
+
+        {/* Sol alt: Defne dalı */}
+        <LaurelBranch position="bottomLeft" />
+
         {/* Partiküller */}
         {([
           [8,3,14,0,30],[20,2,18,2,-20],[35,4,12,1,15],[50,2,16,4,-28],
@@ -105,6 +112,7 @@ export default function PsikologPage() {
         <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(90deg,transparent,var(--gold-d) 30%,var(--gold) 50%,var(--gold-d) 70%,transparent)' }} />
       </section>
 
+      <OrnamentalDivider />
       {/* Alıntı 1 */}
       <QuoteBanner q={PSY_QUOTES[0]} />
 
@@ -333,8 +341,9 @@ export default function PsikologPage() {
       <QuoteBanner q={PSY_QUOTES[3]} />
 
       {/* ── MENTÖRLÜK ── */}
-      <section style={{ padding:'110px 0', background:'var(--bg2)', overflow:'hidden' }}>
-        <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px' }}>
+      <section style={{ padding:'110px 0', background:'var(--bg2)', overflow:'hidden', position:'relative' }}>
+        <FloatingLeaves count={6} color="green" />
+        <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px', position:'relative', zIndex:1 }}>
           <div className="r-grid-2" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }}>
             <div>
               <div className="eyebrow" style={{ marginBottom:'12px' }}>Yeni Mezunlar İçin</div>

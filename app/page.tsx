@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import FeedbackButton from '@/components/FeedbackButton'
 import PublicNavbar from '@/components/layout/PublicNavbar'
+import { DoveFlock, LaurelBranch, FloatingLeaves, OrnamentalDivider } from '@/components/effects/PageEffects'
 
 const CLIENT_QUOTES = [
   { text: "İnsanlar nesnelerden değil, nesneler hakkındaki görüşlerden rahatsız olur.", author: "Epiktetos", field: "Stoacı Felsefe" },
@@ -53,6 +54,12 @@ export default function DanisanPage() {
       {/* ── HERO — Danışan ── */}
       <section style={{ minHeight:'100vh', display:'flex', alignItems:'center', paddingTop:'80px', background:'var(--bg2)', position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', top:'-5%', left:'50%', transform:'translateX(-50%)', width:'1000px', height:'800px', background:'radial-gradient(ellipse,rgba(20,60,35,.55) 0%,transparent 65%)', pointerEvents:'none' }} />
+
+        {/* Sol: Güvercin sürüsü */}
+        <DoveFlock side="left" />
+
+        {/* Sol alt: Defne dalı */}
+        <LaurelBranch position="bottomLeft" />
 
         {/* Partiküller */}
         {([
@@ -109,6 +116,7 @@ export default function DanisanPage() {
         <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(90deg,transparent,var(--gold-d) 30%,var(--gold) 50%,var(--gold-d) 70%,transparent)' }} />
       </section>
 
+      <OrnamentalDivider />
       {/* Alıntı 1 */}
       <QuoteBanner q={CLIENT_QUOTES[0]} />
 
