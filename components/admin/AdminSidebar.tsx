@@ -5,13 +5,14 @@ import { usePathname, useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
 const NAV = [
-  { href: '/admin',            icon: '◈', label: 'Genel Bakış' },
-  { href: '/admin/basvurular', icon: '◷', label: 'Başvurular' },
-  { href: '/admin/psikologlar',icon: '⟁', label: 'Psikologlar' },
-  { href: '/admin/belgeler',    icon: '◉', label: 'Belgeler' },
-  { href: '/admin/sikayetler',  icon: '⚑', label: 'Şikayetler' },
-  { href: '/admin/yukseltmeler', icon: '↑', label: 'Yükseltmeler' },
-  { href: '/admin/gorus',        icon: '💬', label: 'Görüş & İstekler' },
+  { href: '/admin',                icon: '◈',  label: 'Genel Bakış' },
+  { href: '/admin/istatistikler',  icon: '📊', label: 'İstatistikler' },
+  { href: '/admin/basvurular',     icon: '◷',  label: 'Başvurular' },
+  { href: '/admin/psikologlar',    icon: '⟁',  label: 'Psikologlar' },
+  { href: '/admin/belgeler',       icon: '◉',  label: 'Belgeler' },
+  { href: '/admin/sikayetler',     icon: '⚑',  label: 'Şikayetler' },
+  { href: '/admin/yukseltmeler',   icon: '↑',  label: 'Yükseltmeler' },
+  { href: '/admin/gorus',          icon: '💬', label: 'Görüş & İstekler' },
 ]
 
 export default function AdminSidebar() {
