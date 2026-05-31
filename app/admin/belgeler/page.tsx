@@ -64,7 +64,15 @@ export default async function BelgelerPage() {
                     <td style={{ padding:'13px 20px', fontFamily:'Cormorant Garant,serif', color:'var(--text)', fontSize:'.85rem' }}>{d.issuer || '—'}</td>
                     <td style={{ padding:'13px 20px', fontFamily:'Cormorant Garant,serif', color:'var(--muted)', fontSize:'.85rem' }}>{d.issue_year || '—'}</td>
                     <td style={{ padding:'13px 20px' }}>
-                      <DocActions id={d.id} />
+                      <div style={{ display:'flex', gap:'8px', alignItems:'center' }}>
+                        {d.document_url && (
+                          <a href={d.document_url} target="_blank" rel="noopener noreferrer"
+                            style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--gold-d)', textDecoration:'none', whiteSpace:'nowrap' }}>
+                            Görüntüle ↗
+                          </a>
+                        )}
+                        <DocActions id={d.id} />
+                      </div>
                     </td>
                   </tr>
                 ))}

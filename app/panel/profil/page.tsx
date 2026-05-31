@@ -1,19 +1,19 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { PLANS } from '@/lib/stripe/plans'
+import BelgelerSection from './BelgelerSection'
 
 export default async function ProfilPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/giris')
 
-  const [{ data: profile }, { data: psy }, { data: membership }, { data: specs }] = await Promise.all([
+  const [{ data: profile }, { data: psy }, { data: membership }, { data: specs }, { data: docs }] = await Promise.all([
     supabase.from('profiles').select('*').eq('id', user.id).single(),
     supabase.from('psychologists').select('*').eq('id', user.id).single(),
     supabase.from('memberships').select('*').eq('psychologist_id', user.id).single(),
-    supabase.from('psychologist_specializations')
-      .select('specializations(name)')
-      .eq('psychologist_id', user.id),
+    supabase.from('psychologist_specializations').select('specializations(name)').eq('psychologist_id', user.id),
+    supabase.from('psychologist_documents').select('*').eq('psychologist_id', user.id).order('created_at', { ascending: false }),
   ])
 
   const { data: allSpecs } = await supabase.from('specializations').select('name').order('name')
@@ -141,6 +141,11 @@ export default async function ProfilPage() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Belgeler */}
+      <div style={{ marginTop:'28px' }}>
+        <BelgelerSection userId={user.id} initialDocs={docs ?? []} />
       </div>
     </div>
   )
