@@ -148,39 +148,30 @@ h1,h2,h3,h4,h5 {
   .r-nav-links { display: none !important; }
   .r-nav-mobile-btn { display: flex !important; }
 
-  /* Grids → tek kolon */
-  .r-grid-4 { grid-template-columns: 1fr 1fr; }
-  .r-grid-3 { grid-template-columns: 1fr; }
-  .r-grid-2 { grid-template-columns: 1fr; }
-  .r-sidebar { grid-template-columns: 1fr; }
+  /* Grids → !important ile inline style'ı geç */
+  .r-grid-4 { grid-template-columns: 1fr 1fr !important; }
+  .r-grid-3 { grid-template-columns: 1fr !important; }
+  .r-grid-2 { grid-template-columns: 1fr !important; }
+  .r-sidebar { grid-template-columns: 1fr !important; height: auto !important; overflow: visible !important; }
   .r-hide-mobile { display: none !important; }
   .r-show-mobile { display: block !important; }
-  .r-stack { flex-direction: column; }
-
-  /* Padding azalt */
-  .r-pad { padding-left: 20px !important; padding-right: 20px !important; }
+  .r-stack { flex-direction: column !important; }
 
   /* Astrolabe halkalar mobilde gizle */
   .astrolabe-rings { display: none !important; }
 
-  /* Container padding */
-  [style*="padding: 0 32px"],
-  [style*="padding:0 32px"] { padding-left: 20px !important; padding-right: 20px !important; }
-
-  /* Section padding azalt */
-  [style*="padding:'120px 0'"],
-  [style*="padding: 120px"] { padding-top: 60px !important; padding-bottom: 60px !important; }
-  [style*="padding:'110px 0'"],
-  [style*="padding: 110px"] { padding-top: 56px !important; padding-bottom: 56px !important; }
-  [style*="padding:'100px 0'"],
-  [style*="padding: 100px"] { padding-top: 52px !important; padding-bottom: 52px !important; }
-
-  /* Grid override — inline style'ları CSS'de geçmek zor, o yüzden class bazlı çalışıyoruz */
-  .mobile-single { grid-template-columns: 1fr !important; }
-  .mobile-two-col { grid-template-columns: 1fr 1fr !important; }
-
-  /* Dashboard */
+  /* Dashboard panel sidebar gizle */
   .dash-sidebar-desktop { display: none !important; }
+
+  /* Genel max-width kısıtlama */
+  body { overflow-x: hidden; }
+}
+
+@media (max-width: 480px) {
+  .r-grid-4 { grid-template-columns: 1fr !important; }
+  .r-grid-2 { grid-template-columns: 1fr !important; }
+  .r-btn-row { flex-direction: column !important; align-items: stretch !important; }
+  .r-btn-row .btn { width: 100% !important; justify-content: center !important; }
 }
 
 @media (max-width: 480px) {
