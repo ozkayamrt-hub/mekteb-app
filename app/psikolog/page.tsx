@@ -307,11 +307,11 @@ export default function PsikologPage() {
           </div>
           <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'22px' }}>
             {[
-              { roman:'I', name:'Aday', sub:'Yeni Mezun', price:'299₺', featured:false,
+              { roman:'I', name:'Aday', sub:'Yeni Mezun', price:'499₺', minFee:'499₺', featured:false,
                 features:['Kişisel mentör ataması','Sınırlı danışan kotası (3–5)','Süpervizyon seanslarına katılım','Vaka tartışma grupları','Üstatla ortak seans imkânı'] },
-              { roman:'II', name:'Uzman', sub:'Deneyimli Psikolog', price:'599₺', featured:true,
+              { roman:'II', name:'Uzman', sub:'Deneyimli Psikolog', price:'999₺', minFee:'999₺', featured:true,
                 features:['Sınırsız danışan kabulü','Öncelikli danışan eşleşmesi','Öne çıkan profil rozeti','Topluluk etkinliklerine tam erişim','İsteğe bağlı mentörlük','Vaka süpervizyonu liderliği'] },
-              { roman:'III', name:'Üstat', sub:'Mentor & Otorite', price:'999₺', featured:false,
+              { roman:'III', name:'Üstat', sub:'Mentor & Otorite', price:'1.499₺', minFee:'1.499₺', featured:false,
                 features:['Tüm Uzman özellikleri','Resmi mentörlük yetkisi','Aday psikologları seansa alma','Platform içi yayın & makale hakları','Karar komitesi üyeliği','Yönlendirme bonusu'] },
             ].map(t => (
               <div key={t.name} className="tier-card" style={{ border:`1px solid ${t.featured ? 'rgba(201,169,110,.4)' : 'var(--border)'}`, background:t.featured ? 'var(--bg3)' : 'var(--bg2)', padding:'44px 36px', position:'relative' }}>
@@ -398,9 +398,9 @@ export default function PsikologPage() {
           </div>
           <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'22px' }}>
             {[
-              { tier:'Aday', price:'299', features:['Mentör eşleştirmesi','3–5 danışan kabulü','Süpervizyon grupları','Platform profili'], featured:false },
-              { tier:'Uzman', price:'599', features:['Sınırsız danışan kabulü','Öncelikli eşleştirme','Öne çıkan profil','Topluluk etkinlikleri','İsteğe bağlı mentörlük'], featured:true },
-              { tier:'Üstat', price:'999', features:['Tüm Uzman özellikleri','Resmi mentörlük yetkisi','Ortak seans hakkı','Üstat rozeti','Komite üyeliği','Yönlendirme bonusu'], featured:false },
+              { tier:'Aday',  price:'499',   minFee:'499',   features:['Mentör eşleştirmesi','3–5 danışan kabulü','Süpervizyon grupları','Platform profili','Min. seans: 499₺'], featured:false },
+              { tier:'Uzman', price:'999',   minFee:'999',   features:['Sınırsız danışan kabulü','Öncelikli eşleştirme','Öne çıkan profil','Topluluk etkinlikleri','İsteğe bağlı mentörlük','Min. seans: 999₺'], featured:true },
+              { tier:'Üstat', price:'1.499', minFee:'1.499', features:['Tüm Uzman özellikleri','Resmi mentörlük yetkisi','Ortak seans hakkı','Üstat rozeti','Komite üyeliği','Yönlendirme bonusu','Min. seans: 1.499₺'], featured:false },
             ].map(p => (
               <div key={p.tier} className="tier-card" style={{ border:`1px solid ${p.featured ? 'rgba(201,169,110,.4)' : 'var(--border)'}`, background: p.featured ? 'var(--bg3)' : 'var(--bg2)', padding:'44px 36px', position:'relative' }}>
                 {p.featured && <div style={{ position:'absolute', top:'-12px', left:'50%', transform:'translateX(-50%)', background:'var(--gold)', color:'#090f0c', fontFamily:'Cormorant Garant,serif', fontSize:'.72rem', fontWeight:600, letterSpacing:'.12em', textTransform:'uppercase', padding:'3px 16px', whiteSpace:'nowrap' }}>Önerilen</div>}

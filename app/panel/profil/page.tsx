@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { PLANS } from '@/lib/stripe/plans'
+import { MIN_SESSION_FEE } from '@/lib/constants'
 import BelgelerSection from './BelgelerSection'
 import AvatarUpload from '@/components/upload/AvatarUpload'
 
@@ -75,19 +76,41 @@ export default async function ProfilPage() {
               <label className="form-label">Kısa Tanıtım</label>
               <textarea className="form-textarea" defaultValue={psy?.bio ?? ''} style={{ minHeight:'90px', resize:'vertical' }} />
             </div>
-            <div style={{ marginTop: '16px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'14px' }}>
-              <div>
-                <label className="form-label">Seans Ücreti — Minimum (₺)</label>
-                <input className="form-input" type="number" defaultValue={(psy as any)?.session_fee_min ?? ''} placeholder="ör. 600" min="0" step="50" />
-              </div>
-              <div>
-                <label className="form-label">Seans Ücreti — Maksimum (₺)</label>
-                <input className="form-input" type="number" defaultValue={(psy as any)?.session_fee_max ?? ''} placeholder="ör. 1200" min="0" step="50" />
-              </div>
-            </div>
-            <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.75rem', color:'var(--muted)', marginTop:'6px', lineHeight:1.6 }}>
-              Seans ücretinizi siz belirlersiniz. Aralık olarak göstermek isteyen maks değer girebilir, sabit bir ücret için yalnızca min girebilir.
-            </div>
+            {(() => {
+              const tier = (psy as any)?.tier as 'aday' | 'uzman' | 'ustat' | undefined
+              const minAllowed = tier ? MIN_SESSION_FEE[tier] : 0
+              return (
+                <>
+                  {/* Platform minimum uyarısı */}
+                  <div style={{ marginTop:'16px', padding:'12px 16px', background:'rgba(201,169,110,.06)', border:'1px solid rgba(201,169,110,.2)', fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)', lineHeight:1.65 }}>
+                    ◈ &nbsp; <strong style={{ color:'var(--cream)' }}>
+                      {tier === 'aday' ? 'Aday' : tier === 'uzman' ? 'Uzman' : 'Üstat'} kademesi minimum seans ücreti:{' '}
+                      <span style={{ color:'var(--gold)' }}>{minAllowed.toLocaleString('tr-TR')}₺</span>
+                    </strong>
+                    <br />Platform kuralı: Aidat ücretinin altında seans ücreti belirlenemez. Bu kural sağlıklı rekabeti korur.
+                  </div>
+                  <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'14px', marginTop:'14px' }}>
+                    <div>
+                      <label className="form-label">Seans Ücreti — Minimum (₺) <span style={{ color:'var(--gold)' }}>*</span></label>
+                      <input className="form-input" type="number"
+                        defaultValue={(psy as any)?.session_fee_min ?? ''}
+                        placeholder={`Min. ${minAllowed.toLocaleString('tr-TR')}₺`}
+                        min={minAllowed} step="50" />
+                    </div>
+                    <div>
+                      <label className="form-label">Seans Ücreti — Maksimum (₺)</label>
+                      <input className="form-input" type="number"
+                        defaultValue={(psy as any)?.session_fee_max ?? ''}
+                        placeholder="Aralık için (opsiyonel)"
+                        min={minAllowed} step="50" />
+                    </div>
+                  </div>
+                  <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.75rem', color:'var(--muted)', marginTop:'6px', lineHeight:1.6 }}>
+                    Danışanlar bu ücreti arama sayfasında görür. Sabit ücret için yalnızca minimum girin.
+                  </div>
+                </>
+              )
+            })()}
             <div style={{ marginTop: '16px' }}>
               <label className="form-label">Uzmanlık Alanları</label>
               <div style={{ display:'flex', flexWrap:'wrap', gap:'8px' }}>

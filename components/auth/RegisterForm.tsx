@@ -53,9 +53,9 @@ const MENTOR_PREFS = [
   { val:'hayir',          label:'Mentörlük istemiyorum',        desc:'Şimdilik yalnızca bağımsız çalışmayı tercih ediyorum.' },
 ]
 const TIER_INFO = [
-  { val:'aday'  as Tier, roman:'I',   name:'Aday',  sub:'Yeni Mezun',        price:'299₺', desc:'Mentor eşliğinde, güvenli ilk adımlar. 3–5 danışan kabulü.', maxExp:2 },
-  { val:'uzman' as Tier, roman:'II',  name:'Uzman', sub:'Deneyimli Psikolog', price:'599₺', desc:'Bağımsız pratik, öncelikli eşleştirme, sınırsız danışan.', maxExp:9 },
-  { val:'ustat' as Tier, roman:'III', name:'Üstat', sub:'Mentor & Otorite',   price:'999₺', desc:'Mentörlük yetkisi, ortak seans, Üstat rozeti ve karar komitesi.', maxExp:99 },
+  { val:'aday'  as Tier, roman:'I',   name:'Aday',  sub:'Yeni Mezun',        price:'499₺', desc:'Mentor eşliğinde, güvenli ilk adımlar. 3–5 danışan kabulü. Min. seans: 499₺', maxExp:2 },
+  { val:'uzman' as Tier, roman:'II',  name:'Uzman', sub:'Deneyimli Psikolog', price:'999₺', desc:'Bağımsız pratik, öncelikli eşleştirme, sınırsız danışan. Min. seans: 999₺', maxExp:9 },
+  { val:'ustat' as Tier, roman:'III', name:'Üstat', sub:'Mentor & Otorite',   price:'1.499₺', desc:'Mentörlük yetkisi, ortak seans, Üstat rozeti. Min. seans: 1.499₺', maxExp:99 },
 ]
 
 /* ── Shared field styles ── */

@@ -64,7 +64,7 @@ export default function ApprovalActions({ id, tier }: Props) {
       </button>
       <div style={{ marginLeft: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '3px' }}>
         <span style={{ fontFamily: 'Cormorant Garant,serif', fontSize: '.78rem', color: 'var(--muted)' }}>
-          Onaylanırsa <strong style={{ color: 'var(--cream)' }}>{tier === 'aday' ? '299₺' : tier === 'uzman' ? '599₺' : '999₺'}/ay</strong>
+          Onaylanırsa <strong style={{ color: 'var(--cream)' }}>{tier === 'aday' ? '499₺' : tier === 'uzman' ? '999₺' : '1.499₺'}/ay</strong>
         </span>
         {tier === 'aday' && (
           <span style={{ fontFamily: 'Cormorant Garant,serif', fontSize: '.72rem', color: 'var(--gold-d)' }}>
