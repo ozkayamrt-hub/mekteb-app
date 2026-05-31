@@ -437,7 +437,7 @@ export default function PsikologPage() {
           <div className="eyebrow" style={{ marginBottom:'12px' }}>Kurucu Üyelik</div>
           <div style={{ width:'40px', height:'1px', background:'var(--gold)', margin:'0 auto 24px' }} />
           <h2 style={{ fontSize:'clamp(2rem,4vw,3.6rem)', fontWeight:400, marginBottom:'20px' }}>
-            Türkiye'nin psikoloji <em style={{ fontStyle:'italic', color:'var(--gold)' }}>okulunsunuz.</em>
+            Türkiye'nin psikoloji <em style={{ fontStyle:'italic', color:'var(--gold)' }}>okulu.</em>
           </h2>
           <p style={{ fontSize:'1.05rem', color:'var(--text)', marginBottom:'16px', lineHeight:1.8 }}>
             İlk 100 psikolog arasına girin. Kurucu üyeler fiyat garantisi, özel rozet ve topluluk kararlarında oy hakkı kazanır.
