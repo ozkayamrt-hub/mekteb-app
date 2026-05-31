@@ -189,12 +189,40 @@ h1,h2,h3,h4,h5 {
   /* İçerik padding — taşmayı önle */
   .r-pad-section { padding: 52px 20px !important; }
 
-  /* Overflow engelle */
-  body { overflow-x: hidden !important; }
-  .hero-content { max-width: 100% !important; }
+  /* Tüm 3-kolonlu grid'leri tek kolona indir — inline style override */
+  [style*="repeat(3,1fr)"],
+  [style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 4-kolonlu grid'leri 2'ye indir */
+  [style*="repeat(4,1fr)"],
+  [style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* 2-kolonlu grid'leri tek kolona indir */
+  [style*="1fr 1fr"],
+  [style*="'1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Sidebar layout'ları tek kolona indir */
+  [style*="240px 1fr"],
+  [style*="260px 1fr"],
+  [style*="280px 1fr"],
+  [style*="220px 1fr"] {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
 
   /* Adım bağlantı çizgisi gizle */
   .step-connector { display: none !important; }
+
+  /* Overflow engelle */
+  body { overflow-x: hidden !important; }
+  .hero-content { max-width: 100% !important; }
 }
 
 @media (max-width: 480px) {
