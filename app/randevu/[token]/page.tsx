@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation'
 interface Message { id: string; sender: string; body: string; created_at: string }
 interface RequestData {
   id: string; status: string; client_name: string | null
-  psychologist_name: string | null; created_at: string
+  psychologist_name: string | null; psychologist_id: string; created_at: string
 }
 
 const STATUS_MAP: Record<string, { label: string; color: string; icon: string }> = {
@@ -21,7 +21,11 @@ export default function RandevuTakipPage() {
   const [data, setData]       = useState<{ request: RequestData; messages: Message[] } | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError]     = useState('')
-  const [newMsg, setNewMsg]   = useState('')
+  const [newMsg, setNewMsg]       = useState('')
+  const [showRebook, setShowRebook] = useState(false)
+  const [rebookNote, setRebookNote] = useState('')
+  const [rebookSent, setRebookSent] = useState(false)
+  const [rebookLoading, setRebookLoading] = useState(false)
   const [sending, setSending] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
 
@@ -149,6 +153,72 @@ export default function RandevuTakipPage() {
           </div>
         )}
       </div>
+
+          {/* Tekrar Randevu İste — onaylı seanslar için */}
+      {request.status === 'accepted' && (
+        <div style={{ padding:'0 24px', maxWidth:'700px', margin:'0 auto 12px', width:'100%' }}>
+          {!showRebook && !rebookSent && (
+            <button
+              onClick={() => setShowRebook(true)}
+              className="btn btn-outline btn-sm"
+              style={{ width:'100%', justifyContent:'center', borderColor:'rgba(201,169,110,.3)', color:'var(--gold-d)' }}>
+              ↻ Tekrar Randevu İste
+            </button>
+          )}
+
+          {showRebook && !rebookSent && (
+            <div style={{ background:'var(--bg2)', border:'1px solid rgba(201,169,110,.25)', padding:'18px 20px' }}>
+              <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--cream)', fontWeight:500, marginBottom:'10px' }}>
+                Yeni Seans Talebi
+              </div>
+              <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)', marginBottom:'12px', lineHeight:1.6 }}>
+                Tercih ettiğiniz tarih/saat veya kısa bir not yazın. Psikologunuz size dönecek.
+              </p>
+              <textarea
+                value={rebookNote}
+                onChange={e => setRebookNote(e.target.value)}
+                placeholder="ör. Haftaya Salı öğleden sonra uygun, online seans tercih ederim"
+                rows={3}
+                style={{ width:'100%', background:'rgba(255,255,255,.03)', border:'1px solid var(--border)', padding:'10px 14px', color:'var(--cream)', fontFamily:'Lora,serif', fontSize:'.88rem', outline:'none', resize:'none', marginBottom:'10px', lineHeight:1.6 }}
+              />
+              <div style={{ display:'flex', gap:'8px' }}>
+                <button onClick={() => setShowRebook(false)} className="btn btn-ghost btn-sm" style={{ flex:1, justifyContent:'center' }}>
+                  İptal
+                </button>
+                <button
+                  disabled={rebookLoading || !rebookNote.trim()}
+                  className="btn btn-gold btn-sm"
+                  style={{ flex:2, justifyContent:'center' }}
+                  onClick={async () => {
+                    setRebookLoading(true)
+                    await fetch('/api/appointment-requests', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        psychologist_id:   request.psychologist_id,
+                        psychologist_name: request.psychologist_name,
+                        client_name:       request.client_name,
+                        note:              `[Devam Seansı] ${rebookNote}`,
+                        session_type:      null,
+                      }),
+                    })
+                    setRebookLoading(false)
+                    setShowRebook(false)
+                    setRebookSent(true)
+                  }}>
+                  {rebookLoading ? '…' : 'Talebi Gönder →'}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {rebookSent && (
+            <div style={{ padding:'14px 18px', background:'rgba(110,201,138,.06)', border:'1px solid rgba(110,201,138,.25)', fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--green)', textAlign:'center' }}>
+              ✓ Yeni seans talebiniz psikologunuza iletildi.
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Mesaj gönder */}
       {request.status !== 'declined' && (
