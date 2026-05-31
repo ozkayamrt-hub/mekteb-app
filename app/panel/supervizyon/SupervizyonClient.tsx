@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 
 interface Group {
   id: string; title: string; description: string | null; specialty: string | null
@@ -249,6 +250,25 @@ function GroupChat({ groupId, userId }: { groupId: string; userId: string }) {
   useEffect(() => {
     fetch(`/api/supervision-groups/${groupId}/messages`)
       .then(r => r.json()).then(setMessages)
+
+    const supabase = createClient()
+    const channel  = supabase
+      .channel(`group_messages:${groupId}`)
+      .on('postgres_changes', {
+        event: 'INSERT', schema: 'public', table: 'group_messages',
+        filter: `group_id=eq.${groupId}`,
+      }, async (payload) => {
+        const row = payload.new as any
+        // Gönderen profil bilgisini çek
+        const { data: profile } = await supabase
+          .from('profiles').select('full_name').eq('id', row.sender_id).single()
+        const full = { ...row, sender: { profiles: profile } }
+        // Kendi gönderdiğimiz mesaj zaten state'te — duplicate önle
+        setMessages(prev => prev.find(m => m.id === full.id) ? prev : [...prev, full])
+      })
+      .subscribe()
+
+    return () => { supabase.removeChannel(channel) }
   }, [groupId])
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages])
