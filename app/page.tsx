@@ -2,6 +2,28 @@
 
 import Link from 'next/link'
 
+/* ── Inline alıntı şeridi ── */
+function QuoteBanner({ quote }: { quote: typeof QUOTES[0] }) {
+  return (
+    <div style={{ padding:'52px 0', background:'var(--bg2)', position:'relative', overflow:'hidden', borderTop:'1px solid var(--border)', borderBottom:'1px solid var(--border)' }}>
+      <div style={{ position:'absolute', inset:0, background:'linear-gradient(270deg,rgba(20,60,40,.5),rgba(10,25,40,.7),rgba(30,15,50,.4),rgba(10,35,25,.6))', backgroundSize:'400% 400%', animation:'aurora 16s ease infinite', pointerEvents:'none' }} />
+      <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'400px', height:'200px', background:'radial-gradient(ellipse,rgba(201,169,110,.07) 0%,transparent 70%)', pointerEvents:'none' }} />
+      <div style={{ maxWidth:'760px', margin:'0 auto', padding:'0 32px', textAlign:'center', position:'relative', zIndex:1 }}>
+        <div style={{ fontSize:'2.2rem', color:'var(--gold-d)', opacity:.35, fontFamily:'Georgia,serif', lineHeight:1, marginBottom:'8px' }}>&ldquo;</div>
+        <blockquote style={{ fontFamily:'Cormorant Garant,serif', fontSize:'clamp(1.1rem,2.2vw,1.5rem)', fontStyle:'italic', color:'var(--cream)', fontWeight:300, lineHeight:1.65, marginBottom:'20px' }}>
+          {quote.text}
+        </blockquote>
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'14px' }}>
+          <div style={{ height:'1px', width:'32px', background:'var(--gold-d)' }} />
+          <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--gold)', fontWeight:500 }}>{quote.author}</span>
+          <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.75rem', color:'var(--muted)', letterSpacing:'.08em' }}>{quote.field}</span>
+          <div style={{ height:'1px', width:'32px', background:'var(--gold-d)' }} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const QUOTES = [
   { text: "İnsanlar nesnelerden değil, nesneler hakkındaki görüşlerden rahatsız olur.", author: "Epiktetos", field: "Stoacı Felsefe" },
   { text: "Bilinçdışı, şuurlu zihnin red ettiği her şeyi içerir.", author: "Carl Gustav Jung", field: "Analitik Psikoloji" },
@@ -109,7 +131,7 @@ export default function LandingPage() {
           <div style={{ display:'flex', gap:'10px', alignItems:'center' }}>
             <Link href="/giris" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--muted)', textDecoration:'none', padding:'8px 14px' }}>Giriş</Link>
             <Link href="/kayit" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--gold)', border:'1px solid rgba(201,169,110,.35)', padding:'8px 18px', textDecoration:'none', transition:'all .25s' }}>
-              Psikolog misiniz? →
+              Psikolog musunuz? →
             </Link>
           </div>
         </div>
@@ -242,53 +264,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ════════════════ ALINTILER — Aurora ════════════════ */}
-      <section style={{ padding:'120px 0', position:'relative', overflow:'hidden', background:'var(--bg2)' }}>
-        {/* Aurora arka plan */}
-        <div style={{
-          position:'absolute', inset:0, pointerEvents:'none',
-          background:'linear-gradient(270deg,rgba(20,60,40,.6),rgba(10,25,40,.8),rgba(40,20,60,.4),rgba(10,40,30,.7))',
-          backgroundSize:'400% 400%',
-          animation:'aurora 18s ease infinite',
-        }} />
-        {/* Soluk ışık odağı */}
-        <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'600px', height:'600px', background:'radial-gradient(ellipse,rgba(201,169,110,.06) 0%,transparent 70%)', pointerEvents:'none' }} />
-
-        <div style={{ maxWidth:'900px', margin:'0 auto', padding:'0 32px', position:'relative', zIndex:1 }}>
-          <div style={{ textAlign:'center', marginBottom:'72px' }}>
-            <div className="eyebrow" style={{ marginBottom:'12px' }}>Bilgelik Sözleri</div>
-            <div style={{ width:'40px', height:'1px', background:'var(--gold)', margin:'0 auto' }} />
-          </div>
-
-          {/* Alıntı grid */}
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'28px' }}>
-            {QUOTES.map((q, i) => (
-              <div key={i} style={{
-                padding:'36px 40px',
-                background:'rgba(255,255,255,.03)',
-                border:'1px solid rgba(201,169,110,.1)',
-                backdropFilter:'blur(8px)',
-                transition:'border-color .3s, background .3s',
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(201,169,110,.28)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(201,169,110,.05)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(201,169,110,.1)'; (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,.03)'; }}
-              >
-                <div style={{ fontSize:'2rem', color:'var(--gold-d)', opacity:.4, fontFamily:'Georgia,serif', lineHeight:1, marginBottom:'12px' }}>&ldquo;</div>
-                <blockquote style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.08rem', fontStyle:'italic', color:'var(--cream)', fontWeight:300, lineHeight:1.7, marginBottom:'20px' }}>
-                  {q.text}
-                </blockquote>
-                <div style={{ display:'flex', alignItems:'center', gap:'12px' }}>
-                  <div style={{ height:'1px', width:'24px', background:'var(--gold-d)' }} />
-                  <div>
-                    <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--gold)', fontWeight:500 }}>{q.author}</div>
-                    <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.72rem', color:'var(--muted)', letterSpacing:'.08em' }}>{q.field}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Alıntı şeridi 1 — Nasıl Çalışır sonrası */}
+      <QuoteBanner quote={QUOTES[0]} />
 
       {/* ════════════════ PSİKOLOGLAR — Nöron ağı ════════════════ */}
       <section id="psikologlar" style={{ padding:'120px 0', background:'var(--bg)', position:'relative', overflow:'hidden' }}>
@@ -322,7 +299,7 @@ export default function LandingPage() {
         <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px', position:'relative', zIndex:1 }}>
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }}>
             <div>
-              <div className="eyebrow" style={{ marginBottom:'12px' }}>Psikolog misiniz?</div>
+              <div className="eyebrow" style={{ marginBottom:'12px' }}>Psikolog musunuz?</div>
               <div style={{ width:'40px', height:'1px', background:'var(--gold)', marginBottom:'20px' }} />
               <h2 style={{ fontSize:'clamp(2rem,3.5vw,3rem)', fontWeight:400, marginBottom:'24px' }}>
                 Bir okula<br /><em style={{ fontStyle:'italic', color:'var(--gold)' }}>katılın.</em>
@@ -364,6 +341,223 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* ════════════════ PSİKOLOG HEROsu — Eski anasayfa ════════════════ */}
+      <section style={{ padding:'120px 0 80px', background:'var(--bg2)', position:'relative', overflow:'hidden', borderTop:'1px solid var(--border)' }}>
+        {/* Astrolabe halkaları */}
+        <div style={{ position:'absolute', right:'-80px', top:'50%', transform:'translateY(-50%)', width:'640px', height:'640px', pointerEvents:'none' }}>
+          {[
+            { inset:'0%',   dur:'60s',  dir:'normal',  op:.1  },
+            { inset:'9%',   dur:'90s',  dir:'reverse', op:.07 },
+            { inset:'19%',  dur:'70s',  dir:'normal',  op:.14 },
+            { inset:'32%',  dur:'52s',  dir:'reverse', op:.07 },
+            { inset:'43%',  dur:'40s',  dir:'normal',  op:.3  },
+          ].map((r,i) => (
+            <div key={i} className="ring" style={{ inset:r.inset, borderColor:`rgba(201,169,110,${r.op})`, animationDuration:r.dur, animationDirection:r.dir as 'normal'|'reverse' }} />
+          ))}
+          <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'8px', height:'8px', borderRadius:'50%', background:'var(--gold)', boxShadow:'0 0 20px var(--gold)' }} />
+        </div>
+        <div style={{ position:'absolute', top:'-10%', left:'50%', transform:'translateX(-50%)', width:'800px', height:'700px', background:'radial-gradient(ellipse,rgba(30,70,40,.4) 0%,transparent 70%)', pointerEvents:'none' }} />
+
+        <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px', position:'relative', zIndex:2 }}>
+          {/* Badge */}
+          <div style={{ display:'inline-flex', alignItems:'center', gap:'10px', background:'rgba(201,169,110,.08)', border:'1px solid rgba(201,169,110,.22)', padding:'8px 18px', marginBottom:'32px' }}>
+            <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'var(--gold)', display:'inline-block', animation:'pulse 2s ease-in-out infinite' }} />
+            <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', letterSpacing:'.14em', textTransform:'uppercase', color:'var(--gold)' }}>Türkiye'nin İlk Psikolog Okulu</span>
+          </div>
+          <h2 style={{ fontSize:'clamp(2.6rem,5vw,4.6rem)', fontWeight:300, letterSpacing:'-.01em', marginBottom:'24px', maxWidth:'660px' }}>
+            Bilgelik <em style={{ fontStyle:'italic', color:'var(--gold)' }}>aktarılır.</em><br />Deneyim kazanılır.
+          </h2>
+          <p style={{ fontSize:'1.12rem', color:'var(--text)', maxWidth:'520px', marginBottom:'44px', lineHeight:1.85 }}>
+            Mekteb; yeni mezun psikologları ustalarıyla buluşturan, danışanları doğru terapistlere yönlendiren — komisyonsuz, topluluğa dayalı platform.
+          </p>
+          {/* Stats */}
+          <div style={{ display:'flex', gap:'40px', paddingTop:'12px', borderTop:'1px solid var(--border)', maxWidth:'460px' }}>
+            {[['%0','Komisyon'],['3','Kademe'],['₺299','den başlayan aidat']].map(([v,l]) => (
+              <div key={l}>
+                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.9rem', fontWeight:300, color:'var(--gold)', lineHeight:1 }}>{v}</div>
+                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.72rem', letterSpacing:'.1em', textTransform:'uppercase', color:'var(--muted)', marginTop:'5px' }}>{l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Alıntı 2 — Psikolog hero sonrası */}
+      <QuoteBanner quote={QUOTES[3]} />
+
+      {/* ── Neden Mekteb ── */}
+      <section style={{ padding:'100px 0', background:'var(--bg)' }}>
+        <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px' }}>
+          <div style={{ textAlign:'center', marginBottom:'72px' }}>
+            <div className="eyebrow" style={{ marginBottom:'12px' }}>Neden Mekteb?</div>
+            <div style={{ width:'40px', height:'1px', background:'var(--gold)', margin:'0 auto 20px' }} />
+            <h2 style={{ fontSize:'clamp(1.8rem,3.5vw,3rem)', fontWeight:400 }}>Bir platform değil, <em style={{ fontStyle:'italic', color:'var(--gold)' }}>bir okul</em></h2>
+            <p style={{ maxWidth:'520px', margin:'16px auto 0', fontSize:'1rem', color:'var(--text)' }}>Diğer platformlar danışan satarken, Mekteb bilgelik inşa eder.</p>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'2px' }}>
+            {[
+              { icon:'◈', title:'Sıfır Komisyon',          desc:'Her seansınızın karşılığı tamamen size aittir. Aylık sabit aidat — başka hiçbir kesinti yok.' },
+              { icon:'⟁', title:'Canlı Topluluk',          desc:'Alanında köklü psikologlarla aynı çatı altında var olun. Vaka tartışmaları, süpervizyon grupları.' },
+              { icon:'⬡', title:'Yapılandırılmış Mentörlük', desc:'Yeni mezunlar için ustadan öğrenmek, deneyimliler için iz bırakmak. Her kademede anlamlı bir rol.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'var(--bg2)', padding:'48px 40px', border:'1px solid var(--border)', transition:'border-color .3s, background .3s' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border-h)'; (e.currentTarget as HTMLDivElement).style.background = 'var(--bg3)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLDivElement).style.background = 'var(--bg2)'; }}>
+                <div style={{ width:'50px', height:'50px', border:'1px solid var(--border-h)', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'24px', fontSize:'1.3rem', color:'var(--gold)' }}>{c.icon}</div>
+                <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.4rem', fontWeight:400, color:'var(--cream)', marginBottom:'14px' }}>{c.title}</h3>
+                <p style={{ fontSize:'.95rem', color:'var(--text)', lineHeight:1.75 }}>{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Psikolog için Nasıl Çalışır ── */}
+      <section style={{ padding:'100px 0', background:'var(--bg2)' }}>
+        <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px' }}>
+          <div style={{ textAlign:'center', marginBottom:'72px' }}>
+            <div className="eyebrow" style={{ marginBottom:'12px' }}>Süreç</div>
+            <div style={{ width:'40px', height:'1px', background:'var(--gold)', margin:'0 auto 20px' }} />
+            <h2 style={{ fontSize:'clamp(1.8rem,3.5vw,3rem)', fontWeight:400 }}>Üç adımda <em style={{ fontStyle:'italic', color:'var(--gold)' }}>büyüme</em></h2>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'0', position:'relative' }}>
+            <div style={{ position:'absolute', top:'38px', left:'calc(16.5% + 24px)', right:'calc(16.5% + 24px)', height:'1px', background:'linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-d))' }} />
+            {[
+              { n:'I',   title:'Kayıt & Profil',     desc:'Diploma, uzmanlık alanı ve deneyim bilgilerinizle profilinizi oluşturun. Kademiz belirlenir, mentörünüzle eşleşirsiniz.' },
+              { n:'II',  title:'Eşleşme & Randevu',  desc:'Deneyiminize ve uzmanlığınıza göre danışanlar size yönlendirilir. Takvim entegrasyonuyla randevularınızı yönetin.' },
+              { n:'III', title:'Büyü & Rehber Ol',   desc:'Mesleğinizde ilerledikçe kademedeki yeriniz yükselir. Sizi yetiştirenlerin izinden gidin — sonra siz de iz bırakın.' },
+            ].map(s => (
+              <div key={s.n} style={{ textAlign:'center', padding:'0 44px' }}>
+                <div style={{ width:'76px', height:'76px', borderRadius:'50%', border:'1px solid var(--gold-d)', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 28px', fontFamily:'Cormorant Garant,serif', fontSize:'1.7rem', color:'var(--gold)', background:'var(--bg2)', position:'relative', zIndex:1, boxShadow:'0 0 0 8px var(--bg2)' }}>{s.n}</div>
+                <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.35rem', fontWeight:500, color:'var(--cream)', marginBottom:'12px' }}>{s.title}</h3>
+                <p style={{ fontSize:'.92rem', color:'var(--text)', lineHeight:1.75 }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Alıntı 3 — Nasıl Çalışır (psikolog) sonrası */}
+      <QuoteBanner quote={QUOTES[6]} />
+
+      {/* ── Kademe Sistemi (tam versiyon) ── */}
+      <section id="kademe" style={{ padding:'100px 0', background:'var(--bg)' }}>
+        <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px' }}>
+          <div style={{ textAlign:'center', marginBottom:'64px' }}>
+            <div className="eyebrow" style={{ marginBottom:'12px' }}>Kademe Sistemi</div>
+            <div style={{ width:'40px', height:'1px', background:'var(--gold)', margin:'0 auto 20px' }} />
+            <h2 style={{ fontSize:'clamp(1.8rem,3.5vw,3rem)', fontWeight:400 }}>Her psikolog için <em style={{ fontStyle:'italic', color:'var(--gold)' }}>doğru yer</em></h2>
+            <p style={{ maxWidth:'500px', margin:'16px auto 0', fontSize:'1rem', color:'var(--text)' }}>Kademeler deneyimi ödüllendirir, yeni mezunları korur, topluluğu dengeler.</p>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'22px' }}>
+            {[
+              {
+                roman:'I', name:'Aday', sub:'Yeni Mezun', price:'299₺', featured:false,
+                features:['Kişisel mentör ataması','Sınırlı danışan kotası (3–5)','Süpervizyon seanslarına katılım','Vaka tartışma grupları','Üstatla ortak seans imkânı'],
+              },
+              {
+                roman:'II', name:'Uzman', sub:'Deneyimli Psikolog', price:'599₺', featured:true,
+                features:['Sınırsız danışan kabulü','Öncelikli danışan eşleşmesi','Öne çıkan profil rozeti','Topluluk etkinliklerine tam erişim','İsteğe bağlı mentörlük','Vaka süpervizyonu liderliği'],
+              },
+              {
+                roman:'III', name:'Üstat', sub:'Mentor & Otorite', price:'999₺', featured:false,
+                features:['Tüm Uzman özellikleri','Resmi mentörlük yetkisi','Aday psikologları seansa alma','Platform içi yayın & makale hakları','Karar komitesi üyeliği','Yönlendirme bonusu'],
+              },
+            ].map(t => (
+              <div key={t.name} style={{ border:`1px solid ${t.featured ? 'rgba(201,169,110,.4)' : 'var(--border)'}`, background:t.featured ? 'var(--bg3)' : 'var(--bg2)', padding:'44px 36px', position:'relative', transition:'transform .3s' }}
+                onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-4px)')}
+                onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}>
+                {t.featured && <div style={{ position:'absolute', top:'-12px', left:'50%', transform:'translateX(-50%)', background:'var(--gold)', color:'#090f0c', fontFamily:'Cormorant Garant,serif', fontSize:'.72rem', fontWeight:600, letterSpacing:'.12em', textTransform:'uppercase', padding:'3px 16px', whiteSpace:'nowrap' }}>Felsefe Okulu</div>}
+                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'2.8rem', color:'var(--gold)', marginBottom:'6px', lineHeight:1 }}>{t.roman}</div>
+                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.5rem', color:'var(--cream)', fontWeight:500, marginBottom:'4px' }}>{t.name}</div>
+                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--gold)', letterSpacing:'.1em', textTransform:'uppercase', marginBottom:'20px' }}>{t.sub}</div>
+                <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:'10px', marginBottom:'28px' }}>
+                  {t.features.map(f => (
+                    <li key={f} style={{ display:'flex', alignItems:'flex-start', gap:'10px', fontSize:'.88rem', color:'var(--text)' }}>
+                      <span style={{ color:t.featured ? 'var(--gold)' : 'var(--gold-d)', fontSize:'.5rem', marginTop:'7px', flexShrink:0 }}>◆</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <span style={{ padding:'4px 14px', border:'1px solid var(--border-h)', fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--gold-d)' }}>{t.price} / ay</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Alıntı 4 — Kademe sonrası */}
+      <QuoteBanner quote={QUOTES[5]} />
+
+      {/* ── Mentörlük ── */}
+      <section style={{ padding:'100px 0', background:'var(--bg2)', overflow:'hidden' }}>
+        <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }}>
+            <div>
+              <div className="eyebrow" style={{ marginBottom:'12px' }}>Yeni Mezunlar İçin</div>
+              <div style={{ width:'40px', height:'1px', background:'var(--gold)', marginBottom:'20px' }} />
+              <h2 style={{ fontSize:'clamp(1.8rem,3.5vw,3rem)', fontWeight:400, marginBottom:'20px' }}>
+                Tek başına değil, <em style={{ fontStyle:'italic', color:'var(--gold)' }}>yanında</em>
+              </h2>
+              <p style={{ fontSize:'1rem', color:'var(--text)', lineHeight:1.85, marginBottom:'16px' }}>
+                Mezuniyet sonrası en büyük korku: yalnız kalmak. İlk danışanınızı alırken, ilk zor vakayı yönetirken — bir üstatınız olsun.
+              </p>
+              <p style={{ fontSize:'1rem', color:'var(--text)', lineHeight:1.85, marginBottom:'32px' }}>
+                Mekteb'in mentörlük sistemi, deneyimi aktarır. Aday psikologlar sadece kitaptan değil; gerçek seanslardan, gerçek vakalardan öğrenir.
+              </p>
+              <div style={{ borderLeft:'2px solid var(--gold-d)', paddingLeft:'24px', marginBottom:'32px' }}>
+                <blockquote style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.35rem', fontStyle:'italic', color:'var(--cream)', fontWeight:300, lineHeight:1.55 }}>
+                  &ldquo;Bir psikologun yetişmesi on yıl alır. Doğru bir üstatla, bu yolculuk hem daha kısa hem daha derin olur.&rdquo;
+                </blockquote>
+                <cite style={{ display:'block', fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--gold)', letterSpacing:'.1em', textTransform:'uppercase', marginTop:'10px', fontStyle:'normal' }}>— Mekteb Felsefesi</cite>
+              </div>
+            </div>
+            <div style={{ display:'flex', flexDirection:'column', gap:'0' }}>
+              {[
+                { n:'1:3', label:'Üstat — Aday oranı' },
+                { n:'6 ay', label:'Ortalama mentörlük süresi' },
+                { n:'Ortak', label:'Seans imkânı — gerçek vakalar' },
+              ].map((s,i) => (
+                <div key={s.n} style={{ padding:'32px 40px', background: i % 2 === 0 ? 'var(--bg3)' : 'var(--bg4)', border:'1px solid var(--border)', borderTop: i > 0 ? 'none' : '1px solid var(--border)' }}>
+                  <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'3rem', color:'var(--gold)', fontWeight:300, lineHeight:1, marginBottom:'8px' }}>{s.n}</div>
+                  <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--muted)', letterSpacing:'.08em' }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Psikolog CTA — Kayıt ── */}
+      <section style={{ padding:'120px 0', background:'var(--bg)', position:'relative', overflow:'hidden' }}>
+        {/* Nefes halkası */}
+        {[1, 1.5, 2.1, 2.8].map((s, i) => (
+          <div key={i} style={{ position:'absolute', top:'50%', left:'50%', width:'360px', height:'360px', borderRadius:'50%', border:'1px solid rgba(201,169,110,.07)', animation:`breathe ${4.5 + i * .8}s ease-in-out ${i * .7}s infinite` }} />
+        ))}
+        <div style={{ maxWidth:'640px', margin:'0 auto', textAlign:'center', padding:'0 32px', position:'relative', zIndex:1 }}>
+          <div className="eyebrow" style={{ marginBottom:'12px' }}>Kurucu Üyelik</div>
+          <div style={{ width:'40px', height:'1px', background:'var(--gold)', margin:'0 auto 24px' }} />
+          <h2 style={{ fontSize:'clamp(2rem,4vw,3.6rem)', fontWeight:400, marginBottom:'20px' }}>
+            Türkiye'nin psikoloji <em style={{ fontStyle:'italic', color:'var(--gold)' }}>okulunsunuz.</em>
+          </h2>
+          <p style={{ fontSize:'1.08rem', color:'var(--text)', marginBottom:'20px', lineHeight:1.8 }}>
+            İlk 100 psikolog arasına girin. Kurucu üyeler fiyat garantisi, özel rozet ve topluluk kararlarında oy hakkı kazanır.
+          </p>
+          <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--gold)', marginBottom:'40px', letterSpacing:'.06em' }}>
+            ✦ &nbsp; Tek bir seansta aidatınızı karşılarsınız
+          </p>
+          <Link href="/kayit" className="btn btn-gold btn-lg invite-btn" style={{ fontSize:'1.1rem', padding:'16px 48px' }}>
+            Psikolog Olarak Başvur →
+          </Link>
+          <p style={{ marginTop:'18px', fontFamily:'Cormorant Garant,serif', fontSize:'.8rem', color:'var(--muted)' }}>
+            İlk 100 psikolog — kurucu üye fiyatı, ömür boyu geçerli
+          </p>
+        </div>
+      </section>
+
+      {/* Alıntı 5 — Psikolog CTA sonrası */}
+      <QuoteBanner quote={QUOTES[1]} />
 
       {/* ════════════════ DAVET ET ════════════════ */}
       <section style={{ padding:'80px 0', background:'var(--bg2)', borderTop:'1px solid var(--border)', borderBottom:'1px solid var(--border)' }}>
