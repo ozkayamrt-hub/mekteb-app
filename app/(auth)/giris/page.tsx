@@ -71,7 +71,12 @@ export default async function GirisPage({
             </button>
           </form>
 
-          <div style={{ textAlign:'center', marginTop:'24px', borderTop:'1px solid var(--border)', paddingTop:'20px' }}>
+          <div style={{ textAlign:'center', marginTop:'16px' }}>
+            <Link href="/sifremi-unuttum" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--muted)', textDecoration:'none' }}>
+              Şifremi unuttum
+            </Link>
+          </div>
+          <div style={{ textAlign:'center', marginTop:'16px', borderTop:'1px solid var(--border)', paddingTop:'18px' }}>
             <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--muted)' }}>
               Henüz üye değil misiniz?{' '}
               <Link href="/kayit" style={{ color:'var(--gold)', textDecoration:'none' }}>Psikolog olarak katılın →</Link>

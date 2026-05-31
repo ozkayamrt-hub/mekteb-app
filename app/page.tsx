@@ -245,7 +245,7 @@ export default function DanisanPage() {
             </div>
             <div>
               <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.7rem', letterSpacing:'.18em', textTransform:'uppercase', color:'var(--gold)', marginBottom:'14px' }}>Danışanlar</div>
-              {[['Psikolog Bul','/danisan'],['Nasıl Çalışır?','#nasil'],['Giriş','/giris']].map(([l,h]) => (
+              {[['Psikolog Bul','/danisan'],['Nasıl Çalışır?','#nasil'],['İletişim','/iletisim'],['Giriş','/giris']].map(([l,h]) => (
                 <div key={l} style={{ marginBottom:'9px' }}>
                   <Link href={h} style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--muted)', textDecoration:'none' }}>{l}</Link>
                 </div>
