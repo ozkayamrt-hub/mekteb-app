@@ -8,6 +8,7 @@ interface Psychologist {
   id: string; tier: Tier; expYears: number; approach: string
   bio: string; sessionTypes: string[]; isOnline: boolean
   fullName: string; city: string; specs: string[]
+  feeMin: number | null; feeMax: number | null
 }
 interface Filters {
   tier: string[]; session: string[]; spec: string[]; city: string[]
@@ -15,6 +16,14 @@ interface Filters {
 
 const TIER_LABEL: Record<Tier, string> = { aday: 'I — Aday', uzman: 'II — Uzman', ustat: 'III — Üstat' }
 const TIER_CLASS: Record<Tier, string> = { aday: 'tier-aday', uzman: 'tier-uzman', ustat: 'tier-ustat' }
+
+function feeLabel(min: number | null, max: number | null): string | null {
+  if (!min && !max) return null
+  if (min && max && min !== max) return `${min.toLocaleString('tr-TR')}₺ – ${max.toLocaleString('tr-TR')}₺`
+  if (min) return `${min.toLocaleString('tr-TR')}₺`
+  if (max) return `${max.toLocaleString('tr-TR')}₺`
+  return null
+}
 const COLORS = ['#1a2e3f','#2e2230','#2e3a1a','#1e3040','#3a2a18','#1a3028','#2a3018','#302018','#1e2a30','#2a1e30']
 
 const FILTER_OPTIONS = {
@@ -198,6 +207,16 @@ function ProfileDrawer({ psy, colorIdx, onClose, onBook }: {
           </Section>
 
           <Section title="Detaylar">
+            {/* Seans ücreti — öne çıkar */}
+            {feeLabel(psy.feeMin, psy.feeMax) && (
+              <div style={{ padding:'12px 16px', background:'rgba(201,169,110,.07)', border:'1px solid rgba(201,169,110,.25)', marginBottom:'12px', display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--muted)', letterSpacing:'.06em' }}>Seans Ücreti</span>
+                <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.1rem', color:'var(--gold)', fontWeight:500 }}>
+                  {feeLabel(psy.feeMin, psy.feeMax)}
+                  <span style={{ fontSize:'.72rem', color:'var(--muted)', marginLeft:'4px' }}>/seans</span>
+                </span>
+              </div>
+            )}
             {[
               ['Terapötik Yaklaşım', psy.approach],
               ['Deneyim', `${psy.expYears} yıl`],
@@ -292,13 +311,18 @@ function PsyCard({ psy, colorIdx, onClick }: { psy: Psychologist; colorIdx: numb
         </div>
       </div>
 
-      <div style={{ borderTop:'1px solid var(--border)', padding:'14px 28px', display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-        <div style={{ display:'flex', gap:'14px' }}>
+      <div style={{ borderTop:'1px solid var(--border)', padding:'12px 28px', display:'flex', alignItems:'center', justifyContent:'space-between', gap:'8px', flexWrap:'wrap' }}>
+        <div style={{ display:'flex', gap:'12px', flexWrap:'wrap' }}>
           {[['◎', psy.city], ['◇', `${psy.expYears} yıl`], ['▷', psy.sessionTypes.map(s => s === 'online' ? 'Online' : 'Y.Y.').join(' & ')]].map(([icon, val]) => (
             <span key={val} style={{ display:'flex', alignItems:'center', gap:'5px', fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)' }}>
               <span style={{ fontSize:'.85rem' }}>{icon}</span>{val}
             </span>
           ))}
+          {feeLabel(psy.feeMin, psy.feeMax) && (
+            <span style={{ display:'flex', alignItems:'center', gap:'4px', fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--gold)', fontWeight:500 }}>
+              ₺ {feeLabel(psy.feeMin, psy.feeMax)}/seans
+            </span>
+          )}
         </div>
         <button className="btn btn-outline btn-sm" onClick={e => { e.stopPropagation(); onClick() }}>Profil →</button>
       </div>

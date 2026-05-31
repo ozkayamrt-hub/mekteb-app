@@ -14,6 +14,7 @@ export default async function DanisanPage() {
     .from('psychologists')
     .select(`
       id, tier, exp_years, approach, bio, session_types, is_online,
+      session_fee_min, session_fee_max,
       profiles ( full_name, city ),
       psychologist_specializations (
         specializations ( name )
@@ -22,20 +23,21 @@ export default async function DanisanPage() {
     .eq('status', 'active')
     .order('exp_years', { ascending: false })
 
-  // Flatten joined data for client component
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const psychologists = (rawList ?? []).map((p: any) => ({
-    id:          p.id,
-    tier:        p.tier as 'aday' | 'uzman' | 'ustat',
-    expYears:    p.exp_years ?? 0,
-    approach:    p.approach ?? '',
-    bio:         p.bio ?? '',
+    id:           p.id,
+    tier:         p.tier as 'aday' | 'uzman' | 'ustat',
+    expYears:     p.exp_years ?? 0,
+    approach:     p.approach ?? '',
+    bio:          p.bio ?? '',
     sessionTypes: (p.session_types ?? []) as string[],
-    isOnline:    p.is_online ?? false,
-    fullName:    p.profiles?.full_name ?? 'Psikolog',
-    city:        p.profiles?.city ?? '',
+    isOnline:     p.is_online ?? false,
+    fullName:     p.profiles?.full_name ?? 'Psikolog',
+    city:         p.profiles?.city ?? '',
+    feeMin:       p.session_fee_min ?? null,
+    feeMax:       p.session_fee_max ?? null,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    specs:       (p.psychologist_specializations ?? []).map((s: any) => s.specializations?.name).filter(Boolean) as string[],
+    specs:        (p.psychologist_specializations ?? []).map((s: any) => s.specializations?.name).filter(Boolean) as string[],
   }))
 
   return <PsychologistSearch psychologists={psychologists} />
