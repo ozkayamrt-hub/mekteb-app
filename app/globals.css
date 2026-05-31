@@ -192,6 +192,9 @@ h1,h2,h3,h4,h5 {
   /* Overflow engelle */
   body { overflow-x: hidden !important; }
   .hero-content { max-width: 100% !important; }
+
+  /* Adım bağlantı çizgisi gizle */
+  .step-connector { display: none !important; }
 }
 
 @media (max-width: 480px) {
