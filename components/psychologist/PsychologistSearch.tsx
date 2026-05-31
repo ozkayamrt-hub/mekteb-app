@@ -61,8 +61,11 @@ function BookingModal({ psy, onClose }: { psy: Psychologist; onClose: () => void
       <h3 style={{ fontSize:'1.6rem', fontWeight:400, marginBottom:'10px' }}>
         Talebiniz <em style={{ fontStyle:'italic', color:'var(--gold)' }}>alındı</em>
       </h3>
-      <p style={{ fontSize:'.93rem', color:'var(--text)' }}>
-        Psikologunuz 24 saat içinde size dönüş yapacak. E-posta adresinizi kontrol edin.
+      <p style={{ fontSize:'.93rem', color:'var(--text)', marginBottom:'12px' }}>
+        Psikologunuz 24 saat içinde size dönüş yapacak.
+      </p>
+      <p style={{ fontSize:'.8rem', color:'var(--muted)', fontFamily:'Cormorant Garant,serif' }}>
+        🔒 Bilgileriniz yalnızca psikologunuzla paylaşıldı.
       </p>
     </div>
   )
@@ -98,11 +101,20 @@ function BookingModal({ psy, onClose }: { psy: Psychologist; onClose: () => void
         </div>
       </div>
 
+      {/* Gizlilik bildirimi */}
+      <div style={{ display:'flex', alignItems:'flex-start', gap:'10px', background:'rgba(110,201,138,.05)', border:'1px solid rgba(110,201,138,.18)', padding:'12px 16px', marginBottom:'20px', borderRadius:'0' }}>
+        <span style={{ fontSize:'1rem', flexShrink:0, marginTop:'1px' }}>🔒</span>
+        <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)', lineHeight:1.6 }}>
+          Bilgileriniz yalnızca seçtiğiniz psikologla paylaşılır. Ad ve e-posta vermek zorunda değilsiniz — takma ad veya &ldquo;Anonim&rdquo; yazabilirsiniz.{' '}
+          <a href="/gizlilik" target="_blank" rel="noopener noreferrer" style={{ color:'var(--green)', textDecoration:'none' }}>Gizlilik politikası →</a>
+        </p>
+      </div>
+
       {/* Fields */}
       <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'14px', marginBottom:'14px' }}>
         <div>
-          <label className="form-label">Adınız Soyadınız</label>
-          <input className="form-input" value={name} onChange={e => setName(e.target.value)} placeholder="Ad Soyad" />
+          <label className="form-label">Ad / Takma Ad <span style={{ color:'var(--muted)', fontSize:'.65rem', letterSpacing:'.06em' }}>isteğe bağlı</span></label>
+          <input className="form-input" value={name} onChange={e => setName(e.target.value)} placeholder="Ad, takma ad veya anonim" />
         </div>
         <div>
           <label className="form-label">Seans Türü</label>
@@ -114,8 +126,8 @@ function BookingModal({ psy, onClose }: { psy: Psychologist; onClose: () => void
         </div>
       </div>
       <div style={{ marginBottom:'14px' }}>
-        <label className="form-label">E-posta</label>
-        <input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="ornek@mail.com" />
+        <label className="form-label">E-posta <span style={{ color:'var(--muted)', fontSize:'.65rem', letterSpacing:'.06em' }}>isteğe bağlı — yalnızca onay için</span></label>
+        <input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Vermek zorunda değilsiniz" />
       </div>
       <div style={{ marginBottom:'20px' }}>
         <label className="form-label">Kısa Not (isteğe bağlı)</label>

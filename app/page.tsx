@@ -108,13 +108,19 @@ export default function DanisanPage() {
             <Link href="/danisan" className="btn btn-gold btn-lg">Psikolog Bul →</Link>
             <a href="#nasil" className="btn btn-outline btn-lg">Nasıl Çalışır?</a>
           </div>
-          <div style={{ display:'flex', gap:'40px', borderTop:'1px solid var(--border)', paddingTop:'24px' }}>
+          <div style={{ display:'flex', gap:'40px', borderTop:'1px solid var(--border)', paddingTop:'24px', marginBottom:'20px' }}>
             {[['%100','Gizlilik'],['%0','Komisyon'],['24s','Yanıt Süresi']].map(([v,l]) => (
               <div key={l}>
                 <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.7rem', fontWeight:300, color:'var(--gold)', lineHeight:1 }}>{v}</div>
                 <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.73rem', letterSpacing:'.1em', textTransform:'uppercase', color:'var(--muted)', marginTop:'5px' }}>{l}</div>
               </div>
             ))}
+          </div>
+          {/* KVKK güvencesi */}
+          <div style={{ display:'flex', alignItems:'center', gap:'8px', fontFamily:'Cormorant Garant,serif', fontSize:'.8rem', color:'var(--muted)' }}>
+            <span>🔒</span>
+            <span>Kişisel verileriniz KVKK kapsamında korunur. Ad ve iletişim bilgisi vermek zorunda değilsiniz.</span>
+            <Link href="/gizlilik" style={{ color:'var(--gold-d)', textDecoration:'none', whiteSpace:'nowrap' }}>Gizlilik →</Link>
           </div>
         </div>
         <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(90deg,transparent,var(--gold-d) 30%,var(--gold) 50%,var(--gold-d) 70%,transparent)' }} />
@@ -254,9 +260,12 @@ export default function DanisanPage() {
               ))}
             </div>
           </div>
-          <div style={{ borderTop:'1px solid var(--border)', paddingTop:'22px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+          <div style={{ borderTop:'1px solid var(--border)', paddingTop:'22px', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:'12px' }}>
             <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)' }}>© 2026 Mekteb. Tüm hakları saklıdır.</p>
-            <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)', fontStyle:'italic' }}>Türkiye'nin Psikoloji Okulu</p>
+            <div style={{ display:'flex', gap:'20px' }}>
+              <Link href="/gizlilik" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)', textDecoration:'none' }}>🔒 Gizlilik Politikası</Link>
+              <Link href="/kvkk" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)', textDecoration:'none' }}>KVKK</Link>
+            </div>
           </div>
         </div>
       </footer>

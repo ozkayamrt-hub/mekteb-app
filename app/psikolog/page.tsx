@@ -362,6 +362,10 @@ export default function PsikologPage() {
               <Link key={h} href={h} style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--muted)', textDecoration:'none' }}>{l}</Link>
             ))}
           </div>
+          <div style={{ display:'flex', gap:'16px', alignItems:'center' }}>
+            <Link href="/gizlilik" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)', textDecoration:'none' }}>🔒 Gizlilik</Link>
+            <Link href="/kvkk" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)', textDecoration:'none' }}>KVKK</Link>
+          </div>
           <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.8rem', color:'var(--muted)' }}>© 2026 Mekteb</p>
         </div>
       </footer>
