@@ -149,6 +149,17 @@ h1,h2,h3,h4,h5 {
 .r-show-mobile { display: none; }
 .r-stack { display: flex; }
 
+/* ── Navbar responsive ── */
+.nav-desktop { display: flex; gap: 28px; align-items: center; }
+.nav-desktop-cta { display: flex; }
+.nav-hamburger { display: none; }
+
+@media (max-width: 900px) {
+  .nav-desktop     { display: none; }
+  .nav-desktop-cta { display: none; }
+  .nav-hamburger   { display: flex; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }
+}
+
 /* Nav: hamburger varsayılan gizli, masaüstünde gizli */
 .r-nav-mobile-btn { display: none; }
 
