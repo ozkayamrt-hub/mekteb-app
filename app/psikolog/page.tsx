@@ -478,7 +478,7 @@ export default function PsikologPage() {
             Mek<span style={{ color:'var(--gold)' }}>teb</span>
           </Link>
           <div style={{ display:'flex', gap:'24px' }}>
-            {[['Danışan Sayfası','/'],['Kayıt','/kayit'],['Giriş','/giris'],['Psikolog Bul','/danisan']].map(([l,h]) => (
+            {[['Danışan Sayfası','/'],['Kayıt','/kayit'],['Giriş','/giris'],['Psikolog Bul','/danisan'],['Yatırımcılar','/yatirimci']].map(([l,h]) => (
               <Link key={h} href={h} style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--muted)', textDecoration:'none' }}>{l}</Link>
             ))}
           </div>

@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { PLANS } from '@/lib/stripe/plans'
 import BelgelerSection from './BelgelerSection'
+import AvatarUpload from '@/components/upload/AvatarUpload'
 
 export default async function ProfilPage() {
   const supabase = await createClient()
@@ -33,9 +34,7 @@ export default async function ProfilPage() {
         <div>
           {/* Profile header */}
           <div className="card" style={{ padding: '28px', display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '20px' }}>
-            <div style={{ width:'72px', height:'72px', borderRadius:'50%', background:'#1e3d2a', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'Cormorant Garant,serif', fontSize:'1.6rem', color:'var(--cream)', flexShrink:0 }}>
-              {initials}
-            </div>
+            <AvatarUpload userId={user.id} currentUrl={profile?.avatar_url} size={72} />
             <div style={{ flex: 1 }}>
               <h2 style={{ fontSize: '1.4rem', fontWeight: 400, marginBottom: '4px' }}>{profile?.full_name}</h2>
               <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--muted)', letterSpacing:'.06em', marginBottom:'10px' }}>
@@ -75,6 +74,19 @@ export default async function ProfilPage() {
             <div style={{ marginTop: '16px' }}>
               <label className="form-label">Kısa Tanıtım</label>
               <textarea className="form-textarea" defaultValue={psy?.bio ?? ''} style={{ minHeight:'90px', resize:'vertical' }} />
+            </div>
+            <div style={{ marginTop: '16px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'14px' }}>
+              <div>
+                <label className="form-label">Seans Ücreti — Minimum (₺)</label>
+                <input className="form-input" type="number" defaultValue={(psy as any)?.session_fee_min ?? ''} placeholder="ör. 600" min="0" step="50" />
+              </div>
+              <div>
+                <label className="form-label">Seans Ücreti — Maksimum (₺)</label>
+                <input className="form-input" type="number" defaultValue={(psy as any)?.session_fee_max ?? ''} placeholder="ör. 1200" min="0" step="50" />
+              </div>
+            </div>
+            <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.75rem', color:'var(--muted)', marginTop:'6px', lineHeight:1.6 }}>
+              Seans ücretinizi siz belirlersiniz. Aralık olarak göstermek isteyen maks değer girebilir, sabit bir ücret için yalnızca min girebilir.
             </div>
             <div style={{ marginTop: '16px' }}>
               <label className="form-label">Uzmanlık Alanları</label>
