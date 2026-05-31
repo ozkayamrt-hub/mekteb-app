@@ -23,6 +23,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
         tier={(psy?.tier ?? 'aday') as import('@/types/database').Tier}
         isAdmin={user.email === 'ozkaya.mrt@gmail.com'}
         pendingRequests={pendingCount ?? 0}
+        userId={user.id}
       />
       <main style={{ overflow:'auto', background:'var(--bg)' }}>
         {children}

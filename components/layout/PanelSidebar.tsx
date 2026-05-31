@@ -26,9 +26,10 @@ interface Props {
   tier: Tier
   isAdmin?: boolean
   pendingRequests?: number
+  userId?: string
 }
 
-export default function PanelSidebar({ fullName, tier, isAdmin, pendingRequests = 0 }: Props) {
+export default function PanelSidebar({ fullName, tier, isAdmin, pendingRequests = 0, userId }: Props) {
   const pathname = usePathname()
   const router   = useRouter()
   const supabase = createClient()
@@ -114,6 +115,16 @@ export default function PanelSidebar({ fullName, tier, isAdmin, pendingRequests 
           <Link href="/admin" style={{ fontFamily: 'Cormorant Garant,serif', fontSize: '.85rem', color: 'var(--gold)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
             ◈ Admin Paneli
           </Link>
+        )}
+        {userId && (
+          <button
+            onClick={() => navigator.clipboard?.writeText(`https://mekteb.vercel.app/p/${userId}`)}
+            style={{ background:'none', border:'1px solid var(--border-h)', fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--gold-d)', cursor:'pointer', textAlign:'left', padding:'6px 12px', width:'100%', marginBottom:'4px', transition:'border-color .2s' }}
+            onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--gold)')}
+            onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border-h)')}
+          >
+            🔗 Profil Linkim
+          </button>
         )}
         <Link href="/danisan" target="_blank" style={{ fontFamily: 'Cormorant Garant,serif', fontSize: '.85rem', color: 'var(--muted)', textDecoration: 'none' }}>
           ↗ Genel Dizin
