@@ -379,7 +379,7 @@ export default function PsychologistSearch({ psychologists }: { psychologists: P
       </section>
 
       {/* Main layout */}
-      <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'48px 32px 80px', display:'grid', gridTemplateColumns:'260px 1fr', gap:'40px' }}>
+      <div className="r-sidebar" style={{ maxWidth:'1200px', margin:'0 auto', padding:'48px 32px 80px', display:'grid', gridTemplateColumns:'260px 1fr', gap:'40px' }}>
 
         {/* Sidebar filters */}
         <aside>
@@ -433,7 +433,7 @@ export default function PsychologistSearch({ psychologists }: { psychologists: P
               <p style={{ color:'var(--muted)', fontFamily:'Cormorant Garant,serif' }}>Filtrelerinizi değiştirip tekrar deneyin.</p>
             </div>
           ) : (
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:'18px' }}>
+            <div className="r-grid-2" style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:'18px' }}>
               {filtered.map(psy => (
                 <PsyCard key={psy.id} psy={psy} colorIdx={colorIdx(psy)} onClick={() => setSelectedPsy(psy)} />
               ))}

@@ -132,7 +132,7 @@ export default function PsikologPage() {
             <h2 style={{ fontSize:'clamp(2rem,4vw,3.2rem)', fontWeight:400 }}>Bir platform değil, <em style={{ fontStyle:'italic', color:'var(--gold)' }}>bir okul</em></h2>
             <p style={{ maxWidth:'520px', margin:'16px auto 0', fontSize:'1rem', color:'var(--text)' }}>Diğer platformlar danışan satarken, Mekteb bilgelik inşa eder.</p>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'2px' }}>
+          <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'2px' }}>
             {[
               { icon:'◈', title:'Sıfır Komisyon',           desc:'Her seansınızın karşılığı tamamen size aittir. Aylık sabit aidat — başka hiçbir kesinti yok. Kazandıkça siz büyürsünüz, biz değil.' },
               { icon:'⟁', title:'Canlı Topluluk',           desc:'Alanında köklü psikologlarla aynı çatı altında var olun. Vaka tartışmaları, süpervizyon grupları, ortak yayınlar — mesleki yalnızlığın sonu.' },
@@ -350,7 +350,7 @@ export default function PsikologPage() {
       {/* ── MENTÖRLÜK ── */}
       <section style={{ padding:'110px 0', background:'var(--bg2)', overflow:'hidden' }}>
         <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px' }}>
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }}>
+          <div className="r-grid-2" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }}>
             <div>
               <div className="eyebrow" style={{ marginBottom:'12px' }}>Yeni Mezunlar İçin</div>
               <div style={{ width:'40px', height:'1px', background:'var(--gold)', marginBottom:'20px' }} />

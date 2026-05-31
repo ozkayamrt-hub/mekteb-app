@@ -18,7 +18,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
   const psy = psyRaw as PsyResult
 
   return (
-    <div style={{ display:'grid', gridTemplateColumns:'240px 1fr', height:'100vh', overflow:'hidden' }}>
+    <div className="r-sidebar" style={{ display:'grid', gridTemplateColumns:'240px 1fr', height:'100vh', overflow:'hidden' }}>
       <PanelSidebar
         fullName={psy?.profiles?.full_name ?? user.email ?? 'Psikolog'}
         tier={(psy?.tier ?? 'aday') as import('@/types/database').Tier}

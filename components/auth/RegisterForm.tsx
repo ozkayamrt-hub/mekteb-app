@@ -647,7 +647,7 @@ export default function RegisterForm() {
   const progressPct = (step / 5) * 100
 
   return (
-    <div style={{ display:'grid', gridTemplateColumns:'280px 1fr', minHeight:'100vh' }}>
+    <div className="r-sidebar" style={{ display:'grid', gridTemplateColumns:'280px 1fr', minHeight:'100vh' }}>
 
       {/* ── Sidebar ── */}
       <aside style={{ background:'var(--bg2)', borderRight:'1px solid var(--border)', display:'flex', flexDirection:'column', padding:'48px 32px', position:'sticky', top:0, height:'100vh', overflow:'hidden' }}>

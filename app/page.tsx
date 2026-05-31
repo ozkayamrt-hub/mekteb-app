@@ -82,7 +82,7 @@ export default function DanisanPage() {
         ))}
 
         {/* Astrolabe */}
-        <div style={{ position:'absolute', right:'-60px', top:'50%', transform:'translateY(-50%)', width:'580px', height:'580px', pointerEvents:'none' }}>
+        <div className="astrolabe-rings" style={{ position:'absolute', right:'-60px', top:'50%', transform:'translateY(-50%)', width:'580px', height:'580px', pointerEvents:'none' }}>
           {([
             [0,.12,'62s','normal'],[9,.08,'88s','reverse'],[20,.16,'72s','normal'],
             [33,.08,'50s','reverse'],[44,.32,'38s','normal'],
@@ -143,7 +143,7 @@ export default function DanisanPage() {
             <div style={{ width:'40px', height:'1px', background:'var(--gold)', margin:'0 auto 20px' }} />
             <h2 style={{ fontSize:'clamp(2rem,4vw,3.2rem)', fontWeight:400 }}>Üç adımda <em style={{ fontStyle:'italic', color:'var(--gold)' }}>doğru psikolog</em></h2>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'0', position:'relative' }}>
+          <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'0', position:'relative' }}>
             <div style={{ position:'absolute', top:'42px', left:'calc(16.5% + 24px)', right:'calc(16.5% + 24px)', height:'1px', background:'linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-d))' }} />
             {[
               { n:'I',   icon:'◎', title:'Keşfet',  desc:'Uzmanlık alanı, yaklaşım ve şehre göre size uygun psikologları inceleyin. Her profil şeffaf ve detaylı.' },
@@ -178,7 +178,7 @@ export default function DanisanPage() {
               Sevdiklerinizi <em style={{ fontStyle:'italic', color:'var(--gold)' }}>davet edin</em>
             </h2>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'20px' }}>
+          <div className="r-grid-2" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'20px' }}>
             <div className="card hover-lift" style={{ padding:'36px 36px' }}>
               <div style={{ fontSize:'1.8rem', marginBottom:'14px' }}>🤝</div>
               <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.2rem', color:'var(--cream)', marginBottom:'10px' }}>Arkadaşınızı Davet Edin</h3>
@@ -235,7 +235,7 @@ export default function DanisanPage() {
       <footer style={{ background:'var(--bg2)', borderTop:'1px solid var(--border)', padding:'48px 0 28px' }}>
         <div style={{ width:'100%', height:'1px', background:'linear-gradient(90deg,transparent,var(--gold-d) 20%,var(--gold) 50%,var(--gold-d) 80%,transparent)', marginBottom:'48px', opacity:.4 }} />
         <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px' }}>
-          <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:'48px', marginBottom:'40px' }}>
+          <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:'48px', marginBottom:'40px' }}>
             <div>
               <Link href="/" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.5rem', fontWeight:500, color:'var(--cream)', textDecoration:'none', display:'block', marginBottom:'12px' }}>
                 Mek<span style={{ color:'var(--gold)' }}>teb</span>
