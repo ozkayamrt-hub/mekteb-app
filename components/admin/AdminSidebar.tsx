@@ -9,7 +9,8 @@ const NAV = [
   { href: '/admin/basvurular', icon: '◷', label: 'Başvurular' },
   { href: '/admin/psikologlar',icon: '⟁', label: 'Psikologlar' },
   { href: '/admin/belgeler',    icon: '◉', label: 'Belgeler' },
-  { href: '/admin/sikayetler', icon: '⚑', label: 'Şikayetler' },
+  { href: '/admin/sikayetler',  icon: '⚑', label: 'Şikayetler' },
+  { href: '/admin/yukseltmeler',icon: '↑', label: 'Yükseltmeler' },
 ]
 
 export default function AdminSidebar() {

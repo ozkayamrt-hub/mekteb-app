@@ -12,11 +12,12 @@ const TIER_LABEL: Record<Tier, string> = {
 }
 
 const NAV = [
-  { href: '/panel',            icon: '◈', label: 'Genel Bakış' },
-  { href: '/panel/randevular', icon: '◷', label: 'Randevular' },
-  { href: '/panel/danisanlar', icon: '⟁', label: 'Danışanlar' },
-  { href: '/panel/mentorluk',  icon: '⬡', label: 'Mentörlük' },
-  { href: '/panel/profil',     icon: '◎', label: 'Profilim' },
+  { href: '/panel',                  icon: '◈', label: 'Genel Bakış' },
+  { href: '/panel/randevular',       icon: '◷', label: 'Randevular' },
+  { href: '/panel/danisanlar',       icon: '⟁', label: 'Danışanlar' },
+  { href: '/panel/mentorluk',        icon: '⬡', label: 'Mentörlük' },
+  { href: '/panel/kademe-yukselt',   icon: '↑', label: 'Kademe Yükselt' },
+  { href: '/panel/profil',           icon: '◎', label: 'Profilim' },
 ]
 
 interface Props {
