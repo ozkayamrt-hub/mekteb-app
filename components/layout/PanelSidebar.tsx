@@ -25,9 +25,10 @@ interface Props {
   fullName: string
   tier: Tier
   isAdmin?: boolean
+  pendingRequests?: number
 }
 
-export default function PanelSidebar({ fullName, tier, isAdmin }: Props) {
+export default function PanelSidebar({ fullName, tier, isAdmin, pendingRequests = 0 }: Props) {
   const pathname = usePathname()
   const router   = useRouter()
   const supabase = createClient()
@@ -97,6 +98,11 @@ export default function PanelSidebar({ fullName, tier, isAdmin }: Props) {
             >
               <span style={{ fontSize: '1rem', width: '18px', textAlign: 'center' }}>{item.icon}</span>
               {item.label}
+              {item.href === '/panel/randevular' && pendingRequests > 0 && (
+                <span style={{ marginLeft:'auto', background:'var(--gold)', color:'#090f0c', fontFamily:'Lora,serif', fontSize:'.65rem', fontWeight:700, padding:'2px 7px', borderRadius:'10px' }}>
+                  {pendingRequests}
+                </span>
+              )}
             </Link>
           )
         })}

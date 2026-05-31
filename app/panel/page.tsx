@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import ProfileChecklist from './ProfileChecklist'
 
 export default async function PanelPage() {
   const supabase = await createClient()
@@ -18,12 +19,14 @@ export default async function PanelPage() {
     { data: upcoming },
     { data: requests },
     { data: menteeRows },
+    { data: psy },
   ] = await Promise.all([
     supabase.from('clients').select('*', { count: 'exact', head: true }).eq('psychologist_id', user.id).eq('status', 'active'),
     supabase.from('appointments').select('*', { count: 'exact', head: true }).eq('psychologist_id', user.id).gte('scheduled_at', weekStart.toISOString()).lte('scheduled_at', weekEnd.toISOString()).eq('status', 'confirmed'),
     supabase.from('appointments').select('*, clients(name)').eq('psychologist_id', user.id).eq('status', 'confirmed').gte('scheduled_at', new Date().toISOString()).order('scheduled_at').limit(5),
     supabase.from('appointment_requests').select('*').eq('psychologist_id', user.id).eq('status', 'pending').order('created_at', { ascending: false }),
     supabase.from('mentorships').select('*, mentee:mentee_id(id, tier, profiles(full_name))').eq('mentor_id', user.id).eq('status', 'active'),
+    supabase.from('psychologists').select('bio, approach, session_fee_min, session_types, tier, profiles(full_name)').eq('id', user.id).single(),
   ])
 
   const stats = [
@@ -36,10 +39,30 @@ export default async function PanelPage() {
   return (
     <div style={{ padding: '32px 36px' }}>
       {/* Header */}
-      <div style={{ marginBottom: '32px' }}>
-        <div className="eyebrow" style={{ marginBottom: '4px' }}>Hoş geldiniz</div>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 400 }}>Genel <em style={{ fontStyle:'italic', color:'var(--gold)' }}>Bakış</em></h1>
+      <div style={{ marginBottom: '24px', display:'flex', alignItems:'flex-start', justifyContent:'space-between', flexWrap:'wrap', gap:'12px' }}>
+        <div>
+          <div className="eyebrow" style={{ marginBottom: '4px' }}>Hoş geldiniz</div>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 400 }}>Genel <em style={{ fontStyle:'italic', color:'var(--gold)' }}>Bakış</em></h1>
+        </div>
+        {/* Bekleyen talep uyarısı */}
+        {(requests ?? []).length > 0 && (
+          <a href="/panel/randevular" style={{ display:'flex', alignItems:'center', gap:'10px', background:'rgba(201,169,110,.1)', border:'1px solid rgba(201,169,110,.35)', padding:'12px 20px', textDecoration:'none', animation:'pulse 2s ease-in-out infinite' }}>
+            <span style={{ fontSize:'1.2rem' }}>🔔</span>
+            <div>
+              <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--gold)', fontWeight:500 }}>
+                {(requests ?? []).length} yeni randevu talebi
+              </div>
+              <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.72rem', color:'var(--muted)' }}>
+                Yanıtlamak için tıklayın →
+              </div>
+            </div>
+          </a>
+        )}
       </div>
+
+      {/* Profil tamamlama checklist */}
+      <ProfileChecklist psy={psy as any} />
+
 
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '16px', marginBottom: '28px' }}>
