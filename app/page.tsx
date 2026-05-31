@@ -99,7 +99,7 @@ export default function DanisanPage() {
             <a href="#nasil" className="btn btn-outline btn-lg">Nasıl Çalışır?</a>
           </div>
           <div style={{ display:'flex', gap:'40px', borderTop:'1px solid var(--border)', paddingTop:'24px', marginBottom:'20px' }}>
-            {[['%100','Gizlilik'],['%0','Komisyon'],['24s','Yanıt Süresi']].map(([v,l]) => (
+            {[['%100','Gizlilik'],['%0','Komisyon'],['3s','Randevu Yanıtı']].map(([v,l]) => (
               <div key={l}>
                 <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.7rem', fontWeight:300, color:'var(--gold)', lineHeight:1 }}>{v}</div>
                 <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.73rem', letterSpacing:'.1em', textTransform:'uppercase', color:'var(--muted)', marginTop:'5px' }}>{l}</div>
@@ -137,7 +137,7 @@ export default function DanisanPage() {
             <div style={{ position:'absolute', top:'42px', left:'calc(16.5% + 24px)', right:'calc(16.5% + 24px)', height:'1px', background:'linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-d))' }} />
             {[
               { n:'I',   icon:'◎', title:'Keşfet',  desc:'Uzmanlık alanı, yaklaşım ve şehre göre size uygun psikologları inceleyin. Her profil şeffaf ve detaylı.' },
-              { n:'II',  icon:'◈', title:'Eşleş',   desc:'Beğendiğiniz psikologun profiline girin, randevu talep edin. 24 saat içinde yanıt alırsınız.' },
+              { n:'II',  icon:'◈', title:'Eşleş',   desc:'Beğendiğiniz psikologun profiline girin, randevu talep edin. Psikolog 3 saat içinde yanıt verir.' },
               { n:'III', icon:'⬡', title:'İyileş',  desc:'Online veya yüz yüze seanslarınıza başlayın. İlerlemenizi takip edin, gerekirse değişim yapın.' },
             ].map(s => (
               <div key={s.n} style={{ textAlign:'center', padding:'0 44px' }}>
