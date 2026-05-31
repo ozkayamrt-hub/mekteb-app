@@ -21,9 +21,8 @@ export default function AdminSidebar() {
   const supabase = createClient()
 
   async function handleLogout() {
-    await supabase.auth.signOut()
-    router.push('/')
-    router.refresh()
+    await fetch('/api/auth/signout', { method: 'POST' })
+    window.location.href = '/'
   }
 
   return (

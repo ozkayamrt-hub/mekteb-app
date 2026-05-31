@@ -36,9 +36,9 @@ export default function PanelSidebar({ fullName, tier, isAdmin, pendingRequests 
   const initials = fullName.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
 
   async function handleLogout() {
-    await supabase.auth.signOut()
-    router.push('/')
-    router.refresh()
+    // Server-side cookie temizleme + yönlendirme
+    await fetch('/api/auth/signout', { method: 'POST' })
+    window.location.href = '/'
   }
 
   return (
