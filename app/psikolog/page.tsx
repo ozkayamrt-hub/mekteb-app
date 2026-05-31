@@ -37,6 +37,7 @@ function QuoteBanner({ q }: { q: typeof PSY_QUOTES[0] }) {
 }
 
 export default function PsikologPage() {
+  const psyCount = 0 // Açılışta artacak — sosyal kanıt
   return (
     <div style={{ overflowX:'hidden' }}>
       <style>{`
