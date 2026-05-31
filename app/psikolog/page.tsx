@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import FeedbackButton from '@/components/FeedbackButton'
 
 const PSY_QUOTES = [
   { text: "Sevgisiz geçen çocukluk yılları, hastalıkların çoğunun kaynağıdır.", author: "Sigmund Freud", field: "Psikanaliz" },
@@ -490,13 +491,7 @@ export default function PsikologPage() {
         </div>
       </footer>
 
-      {/* Görüş / İstek */}
-      <a href="mailto:ozkaya.mrt@gmail.com?subject=Mekteb Görüş/İstek"
-        style={{ position:'fixed', bottom:'28px', right:'28px', zIndex:500, display:'flex', alignItems:'center', gap:'9px', background:'rgba(13,24,17,.92)', border:'1px solid rgba(201,169,110,.3)', padding:'11px 20px', fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--text)', textDecoration:'none', backdropFilter:'blur(12px)', boxShadow:'0 4px 24px rgba(0,0,0,.4)', transition:'all .3s' }}
-        onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor='var(--gold)'; (e.currentTarget as HTMLAnchorElement).style.color='var(--gold)'; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor='rgba(201,169,110,.3)'; (e.currentTarget as HTMLAnchorElement).style.color='var(--text)'; }}>
-        💬 Görüş / İstek
-      </a>
+      <FeedbackButton userType="psychologist" />
     </div>
   )
 }

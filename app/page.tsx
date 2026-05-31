@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import FeedbackButton from '@/components/FeedbackButton'
 
 const CLIENT_QUOTES = [
   { text: "İnsanlar nesnelerden değil, nesneler hakkındaki görüşlerden rahatsız olur.", author: "Epiktetos", field: "Stoacı Felsefe" },
@@ -270,13 +271,7 @@ export default function DanisanPage() {
         </div>
       </footer>
 
-      {/* ── GÖRÜŞ / İSTEK — Sabit ── */}
-      <a href="mailto:ozkaya.mrt@gmail.com?subject=Mekteb Görüş/İstek"
-        style={{ position:'fixed', bottom:'28px', right:'28px', zIndex:500, display:'flex', alignItems:'center', gap:'9px', background:'rgba(13,24,17,.92)', border:'1px solid rgba(201,169,110,.3)', padding:'11px 20px', fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--text)', textDecoration:'none', backdropFilter:'blur(12px)', boxShadow:'0 4px 24px rgba(0,0,0,.4)', transition:'all .3s' }}
-        onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--gold)'; (e.currentTarget as HTMLAnchorElement).style.color = 'var(--gold)'; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(201,169,110,.3)'; (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text)'; }}>
-        💬 Görüş / İstek
-      </a>
+      <FeedbackButton userType="visitor" />
     </div>
   )
 }
