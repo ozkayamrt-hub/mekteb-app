@@ -53,7 +53,7 @@ export default function PublicNavbar() {
             className="r-nav-mobile-btn"
             onClick={() => setOpen(!open)}
             style={{
-              display: 'none', background: 'none', border: '1px solid var(--border)',
+              background: 'none', border: '1px solid var(--border)',
               color: 'var(--text)', cursor: 'pointer', padding: '8px 12px',
               flexDirection: 'column', gap: '5px', alignItems: 'center', justifyContent: 'center',
               transition: 'border-color .2s',

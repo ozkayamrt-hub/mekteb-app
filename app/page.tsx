@@ -92,7 +92,7 @@ export default function DanisanPage() {
           <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'10px', height:'10px', borderRadius:'50%', background:'var(--gold)', boxShadow:'0 0 24px var(--gold), 0 0 60px rgba(201,169,110,.4)' }} />
         </div>
 
-        <div style={{ maxWidth:'640px', margin:'0 auto 0 calc((100vw - 1200px)/2)', paddingLeft:'32px', paddingRight:'32px', position:'relative', zIndex:2 }}>
+        <div style={{ maxWidth:'640px', margin:'0 auto', padding:'0 24px', position:'relative', zIndex:2 }}>
           <div style={{ display:'inline-flex', alignItems:'center', gap:'10px', background:'rgba(110,201,138,.07)', border:'1px solid rgba(110,201,138,.22)', padding:'8px 18px', marginBottom:'32px' }}>
             <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'var(--green)', display:'inline-block', animation:'pulse 2s ease-in-out infinite' }} />
             <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', letterSpacing:'.14em', textTransform:'uppercase', color:'var(--green)' }}>Uzman Psikologlarla Tanışın</span>
