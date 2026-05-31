@@ -44,23 +44,6 @@ export default function IletisimPage() {
             </div>
           </div>
 
-          {/* WhatsApp */}
-          <div style={{ padding:'32px', background:'rgba(37,211,102,.05)', border:'1px solid rgba(37,211,102,.2)' }}>
-            <div style={{ fontSize:'2rem', marginBottom:'14px' }}>📱</div>
-            <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.15rem', color:'var(--cream)', marginBottom:'8px' }}>WhatsApp</h3>
-            <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--text)', lineHeight:1.65, marginBottom:'16px' }}>
-              Hızlı destek ve acil sorular için WhatsApp hattımıza yazabilirsiniz.
-            </p>
-            <a href="https://wa.me/905XXXXXXXXX" target="_blank" rel="noopener noreferrer"
-              style={{ display:'inline-flex', alignItems:'center', gap:'8px', fontFamily:'Cormorant Garant,serif', fontSize:'.92rem', color:'#25d366', textDecoration:'none', border:'1px solid rgba(37,211,102,.3)', padding:'9px 18px', transition:'background .2s' }}>
-              <span>WhatsApp&apos;ta Yaz</span>
-              <span style={{ fontSize:'1rem' }}>↗</span>
-            </a>
-            <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.72rem', color:'var(--muted)', marginTop:'8px' }}>
-              Hafta içi 09:00–18:00
-            </div>
-          </div>
-
           {/* Psikolog başvuruları */}
           <div style={{ padding:'32px', background:'rgba(201,169,110,.04)', border:'1px solid rgba(201,169,110,.18)' }}>
             <div style={{ fontSize:'2rem', marginBottom:'14px' }}>⬡</div>
