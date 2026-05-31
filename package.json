@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "vercel --token vcp_8IvrGBUsE7BgYnHaw0xkp8nQIwB90oXSy143sNgpzs414qOrWj3iSpzS --scope mert-ozkaya-s-projects --prod --yes && vercel alias mekteb-app.vercel.app mekteb.vercel.app --token vcp_8IvrGBUsE7BgYnHaw0xkp8nQIwB90oXSy143sNgpzs414qOrWj3iSpzS --scope mert-ozkaya-s-projects"
+    "deploy": "vercel --scope mert-ozkaya-s-projects --prod --yes"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
