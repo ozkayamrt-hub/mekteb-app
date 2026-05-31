@@ -7,11 +7,12 @@ export async function GET() {
   if (!user) return NextResponse.json([], { status: 401 })
 
   const { data } = await supabase
-    .from('availability_slots')
+    .from('availability_blocks')
     .select('*')
     .eq('psychologist_id', user.id)
+    .order('block_type')
     .order('day_of_week')
-    .order('start_time')
+    .order('specific_date')
 
   return NextResponse.json(data ?? [])
 }
@@ -22,21 +23,23 @@ export async function POST(req: NextRequest) {
   if (!user) return NextResponse.json({ error: 'Yetkisiz' }, { status: 401 })
 
   const body = await req.json()
-  const { slot_type, day_of_week, specific_date, start_time, end_time, session_type } = body
+  const { block_type, day_of_week, specific_date, start_time, end_time, reason } = body
 
-  if (!start_time || !end_time) return NextResponse.json({ error: 'Saat zorunlu' }, { status: 400 })
-  if (start_time >= end_time) return NextResponse.json({ error: 'Bitiş saati başlangıçtan sonra olmalı' }, { status: 400 })
+  if (!block_type) return NextResponse.json({ error: 'block_type zorunlu' }, { status: 400 })
+  if (block_type === 'weekly' && day_of_week === undefined) return NextResponse.json({ error: 'Gün seçin' }, { status: 400 })
+  if (block_type === 'specific' && !specific_date) return NextResponse.json({ error: 'Tarih seçin' }, { status: 400 })
+  if (start_time && end_time && start_time >= end_time) return NextResponse.json({ error: 'Bitiş saati başlangıçtan sonra olmalı' }, { status: 400 })
 
   const { data, error } = await supabase
-    .from('availability_slots')
+    .from('availability_blocks')
     .insert({
       psychologist_id: user.id,
-      slot_type:       slot_type || 'weekly',
-      day_of_week:     slot_type === 'weekly' ? day_of_week : null,
-      specific_date:   slot_type === 'specific' ? specific_date : null,
-      start_time,
-      end_time,
-      session_type:    session_type || 'both',
+      block_type,
+      day_of_week:   block_type === 'weekly' ? day_of_week : null,
+      specific_date: block_type === 'specific' ? specific_date : null,
+      start_time:    start_time || null,
+      end_time:      end_time || null,
+      reason:        reason || null,
     })
     .select()
     .single()
@@ -52,7 +55,7 @@ export async function DELETE(req: NextRequest) {
 
   const { id } = await req.json()
   const { error } = await supabase
-    .from('availability_slots')
+    .from('availability_blocks')
     .delete()
     .eq('id', id)
     .eq('psychologist_id', user.id)
