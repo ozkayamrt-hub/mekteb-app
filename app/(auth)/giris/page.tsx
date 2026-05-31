@@ -2,6 +2,23 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 
+function ErrorMessage({ msg }: { msg: string }) {
+  const isNotConfirmed = msg.toLowerCase().includes('confirm') || msg.toLowerCase().includes('verified') || msg.toLowerCase().includes('not confirmed')
+  if (isNotConfirmed) return (
+    <div style={{ padding:'14px 16px', border:'1px solid rgba(110,201,138,.3)', background:'rgba(110,201,138,.06)' }}>
+      <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.92rem', color:'var(--green)', fontWeight:500, marginBottom:'4px' }}>✉ E-postanızı doğrulamadınız</div>
+      <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.83rem', color:'var(--text)', lineHeight:1.6 }}>
+        Kayıt olurken gönderilen doğrulama mailindeki bağlantıya tıklamanız gerekiyor. Spam klasörünüzü de kontrol edin.
+      </p>
+    </div>
+  )
+  return (
+    <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--red)', padding:'10px 14px', border:'1px solid rgba(201,110,110,.3)', background:'rgba(201,110,110,.06)' }}>
+      {msg}
+    </p>
+  )
+}
+
 export default async function GirisPage({
   searchParams,
 }: {
@@ -57,11 +74,7 @@ export default async function GirisPage({
               />
             </div>
 
-            {error && (
-              <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--red)', padding:'10px 14px', border:'1px solid rgba(201,110,110,.3)', background:'rgba(201,110,110,.06)' }}>
-                {decodeURIComponent(error)}
-              </p>
-            )}
+            {error && <ErrorMessage msg={decodeURIComponent(error)} />}
 
             <button
               type="submit" className="btn btn-gold btn-md"

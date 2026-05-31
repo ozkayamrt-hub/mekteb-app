@@ -511,14 +511,27 @@ function Divider({ label }: { label:string }) {
 function SuccessScreen() {
   return (
     <div style={{ textAlign:'center', padding:'60px 40px', animation:'fadeUp .5s ease' }}>
+      {/* Mail doğrulama bildirimi — en üstte, belirgin */}
+      <div style={{ background:'rgba(110,201,138,.08)', border:'1px solid rgba(110,201,138,.35)', padding:'18px 24px', marginBottom:'28px', display:'flex', gap:'14px', alignItems:'flex-start', maxWidth:'460px', margin:'0 auto 28px' }}>
+        <span style={{ fontSize:'1.5rem', flexShrink:0 }}>✉</span>
+        <div style={{ textAlign:'left' }}>
+          <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1rem', color:'var(--cream)', fontWeight:500, marginBottom:'6px' }}>
+            E-postanızı doğrulayın
+          </div>
+          <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--text)', lineHeight:1.65 }}>
+            <strong style={{ color:'var(--green)' }}>Şu an bir doğrulama maili gönderildi.</strong> Giriş yapabilmek için e-postanızdaki bağlantıya tıklamanız gerekiyor. Spam klasörünü de kontrol edin.
+          </p>
+        </div>
+      </div>
+
       <div style={{ width:'72px', height:'72px', border:'1px solid var(--gold-d)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 28px', fontSize:'1.8rem', color:'var(--gold)', boxShadow:'0 0 40px rgba(201,169,110,.12)' }}>✦</div>
       <h2 style={{ fontSize:'2.2rem', fontWeight:400, marginBottom:'16px' }}>Başvurunuz <em style={{ fontStyle:'italic', color:'var(--gold)' }}>alındı</em></h2>
-      <p style={{ fontSize:'1rem', color:'var(--text)', maxWidth:'420px', margin:'0 auto 36px' }}>
-        Mekteb ailesine hoş geldiniz. Başvurunuz ekibimiz tarafından inceleniyor — 24 saat içinde e-posta ile dönüş yapacağız.
+      <p style={{ fontSize:'1rem', color:'var(--text)', maxWidth:'420px', margin:'0 auto 28px' }}>
+        Mekteb ailesine hoş geldiniz. E-postanızı doğruladıktan sonra başvurunuz incelenecek.
       </p>
       <div style={{ display:'flex', flexDirection:'column', gap:'12px', maxWidth:'380px', margin:'0 auto 40px', textAlign:'left' }}>
         {[
-          ['01','E-posta doğrulama bağlantısı gönderilecek — gelen kutunuzu kontrol edin.'],
+          ['01','E-posta kutunuzu açın — doğrulama bağlantısına tıklayın (spam\'e de bakın).'],
           ['02','Ekibimiz başvurunuzu inceleyip kademede yerinizi onaylayacak.'],
           ['03','Profiliniz yayına girer, danışan eşleştirmesi başlar.'],
         ].map(([n, t]) => (
