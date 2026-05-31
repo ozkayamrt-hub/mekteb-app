@@ -214,10 +214,16 @@ function ProfileDrawer({ psy, colorIdx, onClose, onBook }: {
         </div>
 
         {/* Footer */}
-        <div style={{ padding:'24px 36px', borderTop:'1px solid var(--border)', flexShrink:0 }}>
+        <div style={{ padding:'20px 36px 24px', borderTop:'1px solid var(--border)', flexShrink:0, display:'flex', flexDirection:'column', gap:'10px' }}>
           <button onClick={onBook} className="btn btn-gold" style={{ width:'100%', justifyContent:'center', fontSize:'1.05rem', padding:'15px' }}>
             Randevu Talep Et
           </button>
+          <a href="/sikayet" target="_blank" rel="noopener noreferrer"
+            style={{ textAlign:'center', fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)', textDecoration:'none', padding:'4px 0', transition:'color .2s' }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}>
+            Bu psikolog hakkında şikayet bildir →
+          </a>
         </div>
       </div>
 
