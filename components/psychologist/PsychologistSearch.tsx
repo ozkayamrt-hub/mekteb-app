@@ -11,7 +11,7 @@ interface Psychologist {
   feeMin: number | null; feeMax: number | null
 }
 interface Filters {
-  tier: string[]; session: string[]; spec: string[]; city: string[]
+  tier: string[]; session: string[]; spec: string[]; city: string[]; maxFee: number | null
 }
 
 const TIER_LABEL: Record<Tier, string> = { aday: 'I — Aday', uzman: 'II — Uzman', ustat: 'III — Üstat' }
@@ -43,10 +43,37 @@ function initials(name: string) {
 function BookingModal({ psy, onClose }: { psy: Psychologist; onClose: () => void }) {
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null)
   const [submitted, setSubmitted] = useState(false)
+  const [trackingToken, setTrackingToken] = useState('')
+  const [loading, setLoading] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [note, setNote] = useState('')
   const [sessionType, setSessionType] = useState('')
+
+  async function handleSubmit() {
+    setLoading(true)
+    const preferredDate = selectedSlot !== null
+      ? `${slots[selectedSlot].day} ${slots[selectedSlot].date} ${slots[selectedSlot].time}`
+      : null
+
+    const res = await fetch('/api/appointment-requests', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        psychologist_id: psy.id,
+        psychologist_name: psy.fullName,
+        client_name: name || null,
+        client_email: email || null,
+        session_type: sessionType === 'Online' ? 'online' : sessionType === 'Yüz Yüze' ? 'yuz_yuze' : null,
+        preferred_dates: preferredDate ? [{ date: preferredDate, time: '' }] : null,
+        note: note || null,
+      }),
+    })
+    const data = await res.json()
+    setLoading(false)
+    if (data.token) setTrackingToken(data.token)
+    setSubmitted(true)
+  }
 
   const slots = useMemo(() => {
     const result = []
@@ -65,16 +92,33 @@ function BookingModal({ psy, onClose }: { psy: Psychologist; onClose: () => void
   }, [])
 
   if (submitted) return (
-    <div style={{ textAlign:'center', padding:'20px 0' }}>
-      <div style={{ fontSize:'2.5rem', color:'var(--gold)', marginBottom:'16px' }}>✦</div>
-      <h3 style={{ fontSize:'1.6rem', fontWeight:400, marginBottom:'10px' }}>
+    <div style={{ textAlign:'center', padding:'16px 0' }}>
+      <div style={{ fontSize:'2.5rem', color:'var(--gold)', marginBottom:'12px' }}>✦</div>
+      <h3 style={{ fontSize:'1.5rem', fontWeight:400, marginBottom:'10px' }}>
         Talebiniz <em style={{ fontStyle:'italic', color:'var(--gold)' }}>alındı</em>
       </h3>
-      <p style={{ fontSize:'.93rem', color:'var(--text)', marginBottom:'12px' }}>
-        Psikologunuz 24 saat içinde size dönüş yapacak.
+      <p style={{ fontSize:'.9rem', color:'var(--text)', marginBottom:'20px', lineHeight:1.7 }}>
+        Psikolog talebinizi inceleyecek. Takip sayfasından durumu görebilir ve <strong style={{ color:'var(--cream)' }}>mesajlaşabilirsiniz</strong>.
       </p>
-      <p style={{ fontSize:'.8rem', color:'var(--muted)', fontFamily:'Cormorant Garant,serif' }}>
-        🔒 Bilgileriniz yalnızca psikologunuzla paylaşıldı.
+
+      {trackingToken && (
+        <div style={{ background:'rgba(201,169,110,.07)', border:'1px solid rgba(201,169,110,.25)', padding:'16px', marginBottom:'16px' }}>
+          <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.72rem', letterSpacing:'.14em', textTransform:'uppercase', color:'var(--gold-d)', marginBottom:'8px' }}>
+            Takip Linkiniz — Kaydedin!
+          </div>
+          <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--cream)', wordBreak:'break-all', marginBottom:'10px' }}>
+            mekteb.vercel.app/randevu/{trackingToken}
+          </div>
+          <button
+            onClick={() => navigator.clipboard?.writeText(`https://mekteb.vercel.app/randevu/${trackingToken}`)}
+            className="btn btn-gold btn-sm" style={{ width:'100%', justifyContent:'center' }}>
+            🔗 Linki Kopyala
+          </button>
+        </div>
+      )}
+
+      <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)', lineHeight:1.6 }}>
+        🔒 Bu link yalnızca sizin erişiminize açıktır. Kişisel bilgileriniz korunur.
       </p>
     </div>
   )
@@ -146,8 +190,8 @@ function BookingModal({ psy, onClose }: { psy: Psychologist; onClose: () => void
       {/* Actions */}
       <div style={{ display:'flex', gap:'12px' }}>
         <button onClick={onClose} className="btn btn-outline btn-md" style={{ flex:1, justifyContent:'center' }}>Vazgeç</button>
-        <button onClick={() => setSubmitted(true)} className="btn btn-gold btn-md" style={{ flex:2, justifyContent:'center' }}>
-          Talebi Gönder →
+        <button onClick={handleSubmit} disabled={loading} className="btn btn-gold btn-md" style={{ flex:2, justifyContent:'center' }}>
+          {loading ? 'Gönderiliyor…' : 'Talebi Gönder →'}
         </button>
       </div>
     </div>
@@ -335,19 +379,19 @@ function PsyCard({ psy, colorIdx, onClick }: { psy: Psychologist; colorIdx: numb
 ══════════════════════════════════════════ */
 export default function PsychologistSearch({ psychologists }: { psychologists: Psychologist[] }) {
   const [search, setSearch] = useState('')
-  const [filters, setFilters] = useState<Filters>({ tier: [], session: [], spec: [], city: [] })
+  const [filters, setFilters] = useState<Filters>({ tier: [], session: [], spec: [], city: [], maxFee: null })
   const [selectedPsy, setSelectedPsy] = useState<Psychologist | null>(null)
   const [bookingPsy, setBookingPsy] = useState<Psychologist | null>(null)
 
-  const toggleFilter = useCallback((key: keyof Filters, val: string) => {
+  const toggleFilter = useCallback((key: 'tier'|'session'|'spec'|'city', val: string) => {
     setFilters(prev => ({
       ...prev,
-      [key]: prev[key].includes(val) ? prev[key].filter(v => v !== val) : [...prev[key], val],
+      [key]: prev[key].includes(val) ? prev[key].filter((v: string) => v !== val) : [...prev[key], val],
     }))
   }, [])
 
   const resetFilters = () => {
-    setFilters({ tier: [], session: [], spec: [], city: [] })
+    setFilters({ tier: [], session: [], spec: [], city: [], maxFee: null })
     setSearch('')
   }
 
@@ -359,6 +403,7 @@ export default function PsychologistSearch({ psychologists }: { psychologists: P
       if (filters.session.length && !filters.session.some(s => p.sessionTypes.includes(s))) return false
       if (filters.spec.length && !filters.spec.some(s => p.specs.includes(s))) return false
       if (filters.city.length && !filters.city.includes(p.city)) return false
+      if (filters.maxFee && p.feeMin && p.feeMin > filters.maxFee) return false
       return true
     })
   }, [psychologists, search, filters])
@@ -440,6 +485,21 @@ export default function PsychologistSearch({ psychologists }: { psychologists: P
                 <FilterTag key={c} label={c} active={filters.city.includes(c)} onClick={() => toggleFilter('city', c)} />
               ))}
             </FilterBlock>
+
+            {/* Ücret */}
+            <FilterBlock title="Seans Ücreti (maks)">
+              {[
+                { val: 500,  label: '500₺ altı' },
+                { val: 1000, label: '1.000₺ altı' },
+                { val: 1500, label: '1.500₺ altı' },
+                { val: 2000, label: '2.000₺ altı' },
+              ].map(({ val, label }) => (
+                <FilterTag key={val} label={label}
+                  active={filters.maxFee === val}
+                  onClick={() => setFilters(prev => ({ ...prev, maxFee: prev.maxFee === val ? null : val }))}
+                />
+              ))}
+            </FilterBlock>
           </div>
         </aside>
 
@@ -452,10 +512,14 @@ export default function PsychologistSearch({ psychologists }: { psychologists: P
           </div>
 
           {filtered.length === 0 ? (
-            <div className="card" style={{ padding:'60px', textAlign:'center' }}>
-              <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.4rem', marginBottom:'12px' }}>Sonuç bulunamadı</h3>
-              <p style={{ color:'var(--muted)', fontFamily:'Cormorant Garant,serif' }}>Filtrelerinizi değiştirip tekrar deneyin.</p>
-            </div>
+            psychologists.length === 0
+              ? <EmptyState />
+              : (
+              <div className="card" style={{ padding:'60px', textAlign:'center' }}>
+                <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.4rem', marginBottom:'12px' }}>Sonuç bulunamadı</h3>
+                <p style={{ color:'var(--muted)', fontFamily:'Cormorant Garant,serif' }}>Filtrelerinizi değiştirip tekrar deneyin.</p>
+              </div>
+            )
           ) : (
             <div className="r-grid-2" style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:'18px' }}>
               {filtered.map(psy => (
@@ -489,6 +553,47 @@ export default function PsychologistSearch({ psychologists }: { psychologists: P
             </div>
           </div>
           <style>{`@keyframes scaleIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}`}</style>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function EmptyState() {
+  const [email, setEmail] = useState('')
+  const [sent, setSent]   = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  async function signup() {
+    if (!email.match(/\S+@\S+\.\S+/)) return
+    setLoading(true)
+    await fetch('/api/waitlist', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    })
+    setSent(true); setLoading(false)
+  }
+
+  return (
+    <div className="card" style={{ padding:'52px 40px', textAlign:'center' }}>
+      <div style={{ fontSize:'2.5rem', color:'var(--gold)', marginBottom:'16px' }}>⬡</div>
+      <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.6rem', fontWeight:400, marginBottom:'12px' }}>
+        Psikologlar <em style={{ fontStyle:'italic', color:'var(--gold)' }}>yakında katılıyor</em>
+      </h3>
+      <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.95rem', color:'var(--text)', maxWidth:'440px', margin:'0 auto 32px', lineHeight:1.75 }}>
+        Platform yeni kuruluyor. İlk psikologlar onaylandığında hemen haberdar olmak için e-postanızı bırakın.
+      </p>
+      {sent ? (
+        <div style={{ padding:'14px 20px', background:'rgba(110,201,138,.08)', border:'1px solid rgba(110,201,138,.25)', fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--green)' }}>
+          ✓ Kaydedildiniz — psikologlar eklenince bildirim göndereceğiz.
+        </div>
+      ) : (
+        <div style={{ display:'flex', gap:'0', maxWidth:'400px', margin:'0 auto' }}>
+          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="E-posta adresiniz"
+            style={{ flex:1, background:'rgba(255,255,255,.03)', border:'1px solid var(--border-h)', borderRight:'none', padding:'12px 16px', color:'var(--cream)', fontFamily:'Lora,serif', fontSize:'.9rem', outline:'none' }} />
+          <button onClick={signup} disabled={loading} className="btn btn-gold" style={{ borderRadius:0, padding:'12px 20px', whiteSpace:'nowrap' }}>
+            {loading ? '…' : 'Haber Ver'}
+          </button>
         </div>
       )}
     </div>

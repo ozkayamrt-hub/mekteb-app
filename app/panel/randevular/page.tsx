@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import RequestCard from './RequestCard'
 
 export default async function RandevularPage() {
   const supabase = await createClient()
@@ -89,13 +90,7 @@ export default async function RandevularPage() {
           ) : (
             (pending ?? []).map(req => (
               <div key={req.id} style={{ padding: '16px 24px', borderBottom: '1px solid var(--border)' }}>
-                <div style={{ fontFamily: 'Cormorant Garant,serif', fontSize: '.95rem', color: 'var(--cream)', marginBottom: '4px' }}>{req.client_name}</div>
-                <div style={{ fontFamily: 'Cormorant Garant,serif', fontSize: '.78rem', color: 'var(--muted)', marginBottom: '8px' }}>{req.client_email}</div>
-                {req.note && <p style={{ fontStyle: 'italic', fontSize: '.83rem', color: 'var(--text)', marginBottom: '10px' }}>&ldquo;{req.note}&rdquo;</p>}
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <button className="btn btn-gold btn-sm">Onayla</button>
-                  <button className="btn btn-outline btn-sm">Reddet</button>
-                </div>
+                <RequestCard req={req as any} />
               </div>
             ))
           )}
