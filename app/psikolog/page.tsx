@@ -146,8 +146,8 @@ export default function PsikologPage() {
             <div style={{ width:'40px', height:'1px', background:'var(--gold)', margin:'0 auto 20px' }} />
             <h2 style={{ fontSize:'clamp(2rem,4vw,3.2rem)', fontWeight:400 }}>Üç adımda <em style={{ fontStyle:'italic', color:'var(--gold)' }}>büyüme</em></h2>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'0', position:'relative' }}>
-            <div style={{ position:'absolute', top:'38px', left:'calc(16.5% + 24px)', right:'calc(16.5% + 24px)', height:'1px', background:'linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-d))' }} />
+          <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'0', position:'relative' }}>
+            <div className="step-connector" style={{ position:'absolute', top:'38px', left:'calc(16.5% + 24px)', right:'calc(16.5% + 24px)', height:'1px', background:'linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-d))' }} />
             {[
               { n:'I',   title:'Kayıt & Profil',    desc:'Diploma, uzmanlık ve deneyim bilgilerinizle profilinizi oluşturun. Kademiz belirlenir, mentörünüzle eşleşirsiniz.' },
               { n:'II',  title:'Eşleşme & Randevu', desc:'Deneyiminize ve uzmanlığınıza göre danışanlar size yönlendirilir. Takvim entegrasyonuyla randevularınızı yönetin.' },
@@ -180,7 +180,7 @@ export default function PsikologPage() {
             </p>
           </div>
 
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'2px', marginBottom:'48px' }}>
+          <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'2px', marginBottom:'48px' }}>
             {[
               {
                 roman:'I', name:'Aday', color:'rgba(160,181,165,.15)', border:'rgba(160,181,165,.3)',
@@ -297,7 +297,7 @@ export default function PsikologPage() {
             <h2 style={{ fontSize:'clamp(2rem,4vw,3.2rem)', fontWeight:400 }}>Her psikolog için <em style={{ fontStyle:'italic', color:'var(--gold)' }}>doğru yer</em></h2>
             <p style={{ maxWidth:'500px', margin:'16px auto 0', fontSize:'1rem', color:'var(--text)' }}>Kademeler deneyimi ödüllendirir, yeni mezunları korur, topluluğu dengeler.</p>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'22px' }}>
+          <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'22px' }}>
             {[
               { roman:'I', name:'Aday', sub:'Yeni Mezun', price:'299₺', featured:false,
                 features:['Kişisel mentör ataması','Sınırlı danışan kotası (3–5)','Süpervizyon seanslarına katılım','Vaka tartışma grupları','Üstatla ortak seans imkânı'] },
@@ -387,7 +387,7 @@ export default function PsikologPage() {
               ◆ &nbsp; Tek bir seansla aidatınızın tamamını karşılayabilirsiniz
             </div>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'22px' }}>
+          <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'22px' }}>
             {[
               { tier:'Aday', price:'299', features:['Mentör eşleştirmesi','3–5 danışan kabulü','Süpervizyon grupları','Platform profili'], featured:false },
               { tier:'Uzman', price:'599', features:['Sınırsız danışan kabulü','Öncelikli eşleştirme','Öne çıkan profil','Topluluk etkinlikleri','İsteğe bağlı mentörlük'], featured:true },
@@ -452,6 +452,36 @@ export default function PsikologPage() {
               className="btn btn-outline" style={{ padding:'10px 24px', fontSize:'.9rem' }}>
               ✉ Meslektaşınızı Davet Edin
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── İLETİŞİM & DESTEK ── */}
+      <section style={{ padding:'72px 0', background:'var(--bg2)', borderTop:'1px solid var(--border)' }}>
+        <div style={{ maxWidth:'960px', margin:'0 auto', padding:'0 24px' }}>
+          <div style={{ textAlign:'center', marginBottom:'40px' }}>
+            <div className="eyebrow" style={{ marginBottom:'8px' }}>Destek</div>
+            <h2 style={{ fontSize:'clamp(1.5rem,3vw,2.2rem)', fontWeight:400 }}>Sorularınız için <em style={{ fontStyle:'italic', color:'var(--gold)' }}>buradayız</em></h2>
+          </div>
+          <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'16px' }}>
+            <div className="card" style={{ padding:'24px', textAlign:'center' }}>
+              <div style={{ fontSize:'1.6rem', marginBottom:'10px' }}>✉</div>
+              <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1rem', color:'var(--cream)', marginBottom:'6px' }}>E-posta</h3>
+              <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)', marginBottom:'12px', lineHeight:1.6 }}>Kayıt ve üyelik soruları</p>
+              <a href="mailto:info@mekteb.com.tr" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--gold)', textDecoration:'none' }}>info@mekteb.com.tr</a>
+            </div>
+            <div style={{ padding:'24px', background:'rgba(37,211,102,.05)', border:'1px solid rgba(37,211,102,.2)', textAlign:'center' }}>
+              <div style={{ fontSize:'1.6rem', marginBottom:'10px' }}>📱</div>
+              <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1rem', color:'var(--cream)', marginBottom:'6px' }}>WhatsApp</h3>
+              <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)', marginBottom:'12px', lineHeight:1.6 }}>Hızlı sorular için</p>
+              <a href="https://wa.me/905XXXXXXXXX" target="_blank" rel="noopener noreferrer" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'#25d366', textDecoration:'none' }}>WhatsApp'ta Yaz →</a>
+            </div>
+            <div className="card" style={{ padding:'24px', textAlign:'center' }}>
+              <div style={{ fontSize:'1.6rem', marginBottom:'10px' }}>💬</div>
+              <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1rem', color:'var(--cream)', marginBottom:'6px' }}>Görüş & İstek</h3>
+              <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)', marginBottom:'12px', lineHeight:1.6 }}>Öneri ve geri bildirim</p>
+              <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--muted)' }}>Sağ alttaki 💬 buton</span>
+            </div>
           </div>
         </div>
       </section>
