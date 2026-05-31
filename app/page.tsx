@@ -4,6 +4,7 @@ import Link from 'next/link'
 import FeedbackButton from '@/components/FeedbackButton'
 import PublicNavbar from '@/components/layout/PublicNavbar'
 import { DoveFlock, LaurelBranch, FloatingLeaves, OrnamentalDivider } from '@/components/effects/PageEffects'
+import CopyButton from '@/components/CopyButton'
 
 const CLIENT_QUOTES = [
   { text: "İnsanlar nesnelerden değil, nesneler hakkındaki görüşlerden rahatsız olur.", author: "Epiktetos", field: "Stoacı Felsefe" },
@@ -175,10 +176,12 @@ export default function DanisanPage() {
               <p style={{ fontSize:'.9rem', color:'var(--text)', lineHeight:1.7, marginBottom:'22px' }}>
                 Psikolojik destek almayı düşünen biri var mı? Linki paylaşın, doğru psikologu bulmalarına yardımcı olun.
               </p>
-              <button onClick={() => navigator.clipboard?.writeText('https://mekteb.vercel.app/danisan')}
-                className="btn btn-outline" style={{ fontSize:'.88rem', padding:'9px 20px' }}>
-                🔗 Linki Kopyala
-              </button>
+              <CopyButton
+                text="https://mekteb.vercel.app/danisan"
+                label="🔗 Linki Kopyala"
+                className="btn btn-outline"
+                style={{ fontSize:'.88rem', padding:'9px 20px' }}
+              />
             </div>
             <div style={{ padding:'36px 36px', background:'rgba(201,169,110,.04)', border:'1px solid rgba(201,169,110,.18)', transition:'transform .3s' }}
               onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-4px)')}
@@ -188,10 +191,13 @@ export default function DanisanPage() {
               <p style={{ fontSize:'.9rem', color:'var(--text)', lineHeight:1.7, marginBottom:'22px' }}>
                 Güvendiğiniz bir psikolog var mı? Mekteb'e katılmaları için davet bağlantısını gönderin.
               </p>
-              <button onClick={() => navigator.clipboard?.writeText('https://mekteb.vercel.app/psikolog')}
-                className="btn btn-gold" style={{ fontSize:'.88rem', padding:'9px 20px' }}>
-                ✉ Psikolog Davet Et
-              </button>
+              <CopyButton
+                text="https://mekteb.vercel.app/psikolog"
+                label="✉ Psikolog Davet Et"
+                successLabel="✓ Link Kopyalandı!"
+                className="btn btn-gold"
+                style={{ fontSize:'.88rem', padding:'9px 20px' }}
+              />
             </div>
           </div>
         </div>

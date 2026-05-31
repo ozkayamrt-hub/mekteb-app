@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import FeedbackButton from '@/components/FeedbackButton'
 import PublicNavbar from '@/components/layout/PublicNavbar'
 import { DoveFlock, LaurelBranch, FloatingLeaves, OrnamentalDivider } from '@/components/effects/PageEffects'
+import CopyButton from '@/components/CopyButton'
 
 const PSY_QUOTES = [
   { text: "Sevgisiz geçen çocukluk yılları, hastalıkların çoğunun kaynağıdır.", author: "Sigmund Freud", field: "Psikanaliz" },
@@ -473,10 +474,13 @@ export default function PsikologPage() {
             <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.95rem', color:'var(--text)', marginBottom:'16px' }}>
               Değer verdiğiniz bir meslektaşınız var mı?
             </p>
-            <button onClick={() => navigator.clipboard?.writeText('https://mekteb.vercel.app/psikolog')}
-              className="btn btn-outline" style={{ padding:'10px 24px', fontSize:'.9rem' }}>
-              ✉ Meslektaşınızı Davet Edin
-            </button>
+            <CopyButton
+              text="https://mekteb.vercel.app/psikolog"
+              label="✉ Meslektaşınızı Davet Edin"
+              successLabel="✓ Link Kopyalandı!"
+              className="btn btn-outline"
+              style={{ padding:'10px 24px', fontSize:'.9rem' }}
+            />
           </div>
         </div>
       </section>
