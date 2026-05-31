@@ -182,6 +182,126 @@ export default function PsikologPage() {
       {/* Alıntı 3 */}
       <QuoteBanner q={PSY_QUOTES[2]} />
 
+      {/* ── KADEME KRİTERLERİ ── */}
+      <section style={{ padding:'100px 0', background:'var(--bg2)' }}>
+        <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px' }}>
+          <div style={{ textAlign:'center', marginBottom:'64px' }}>
+            <div className="eyebrow" style={{ marginBottom:'12px' }}>Kademe Şartları</div>
+            <div style={{ width:'40px', height:'1px', background:'var(--gold)', margin:'0 auto 20px' }} />
+            <h2 style={{ fontSize:'clamp(2rem,4vw,3rem)', fontWeight:400 }}>Kademeler <em style={{ fontStyle:'italic', color:'var(--gold)' }}>nesnel kriterlere</em> dayanır</h2>
+            <p style={{ maxWidth:'540px', margin:'16px auto 0', fontSize:'1rem', color:'var(--text)' }}>
+              Her kademenin net şartları vardır. Üst kademeye geçiş otomatik değildir — başvuru, belge incelemesi ve komite onayı gerektirir.
+            </p>
+          </div>
+
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'2px', marginBottom:'48px' }}>
+            {[
+              {
+                roman:'I', name:'Aday', color:'rgba(160,181,165,.15)', border:'rgba(160,181,165,.3)',
+                gereklilik:[
+                  'Psikoloji veya klinik psikoloji lisans diploması',
+                  'Türk Psikologlar Derneği veya muadil üyelik belgesi',
+                  '0–2 yıl mesleki deneyim',
+                ],
+                sinirlamalar:[
+                  'Mentor zorunludur — mentörsüz aktif olamaz',
+                  'En fazla 5 aktif danışan',
+                  'Bağımsız seans notu tutamaz (süpervizyon altında)',
+                ],
+                gecis:'Uzman kademesine geçiş için: min. 3 yıl deneyim + min. 50 tamamlanmış seans + Uzman Geçiş Başvurusu',
+              },
+              {
+                roman:'II', name:'Uzman', color:'rgba(158,125,76,.12)', border:'rgba(158,125,76,.4)',
+                gereklilik:[
+                  'Lisans veya yüksek lisans diploması (psikoloji/klinik)',
+                  'Min. 3 yıl aktif mesleki deneyim',
+                  'Min. 50 tamamlanmış seans (Mekteb üzerinden veya belgelenmiş)',
+                  'Geçerli TPD veya muadil üyeliği',
+                ],
+                sinirlamalar:[
+                  'Sınırsız danışan kabulü',
+                  'Mentörlük isteğe bağlı',
+                ],
+                gecis:'Üstat kademesine geçiş için: min. 10 yıl deneyim + min. 200 seans + yüksek lisans/doktora + Üstat Geçiş Başvurusu',
+              },
+              {
+                roman:'III', name:'Üstat', color:'rgba(201,169,110,.1)', border:'rgba(201,169,110,.4)',
+                gereklilik:[
+                  'Klinik Psikoloji Yüksek Lisans veya Doktora',
+                  'Min. 10 yıl aktif mesleki deneyim',
+                  'Min. 200 tamamlanmış seans (belgelenmiş)',
+                  'Geçerli uzmanlık sertifikası (BDT, EMDR, Şema vb.)',
+                  'Komite değerlendirmesi ve onayı',
+                ],
+                sinirlamalar:[
+                  'Resmi mentörlük yetkisi',
+                  'Aday psikologları seansa alabilir',
+                  'Komite üyeliği için aday olabilir',
+                ],
+                gecis:null,
+              },
+            ].map(t => (
+              <div key={t.name} style={{ background:t.color, border:`1px solid ${t.border}`, padding:'36px 32px' }}>
+                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'2.4rem', color:'var(--gold)', lineHeight:1, marginBottom:'6px' }}>{t.roman}</div>
+                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.3rem', color:'var(--cream)', fontWeight:500, marginBottom:'20px' }}>{t.name} Kademesi</div>
+
+                <div style={{ marginBottom:'20px' }}>
+                  <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.7rem', letterSpacing:'.16em', textTransform:'uppercase', color:'var(--gold-d)', marginBottom:'10px' }}>Gereklilikler</div>
+                  <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:'8px' }}>
+                    {t.gereklilik.map(g => (
+                      <li key={g} style={{ display:'flex', gap:'9px', alignItems:'flex-start', fontSize:'.85rem', color:'var(--text)' }}>
+                        <span style={{ color:'var(--green)', fontSize:'.6rem', marginTop:'6px', flexShrink:0 }}>✓</span>{g}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {t.sinirlamalar.length > 0 && (
+                  <div style={{ marginBottom:'20px' }}>
+                    <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.7rem', letterSpacing:'.16em', textTransform:'uppercase', color:'var(--gold-d)', marginBottom:'10px' }}>Haklar</div>
+                    <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:'8px' }}>
+                      {t.sinirlamalar.map(s => (
+                        <li key={s} style={{ display:'flex', gap:'9px', alignItems:'flex-start', fontSize:'.85rem', color:'var(--text)' }}>
+                          <span style={{ color:'var(--gold-d)', fontSize:'.5rem', marginTop:'7px', flexShrink:0 }}>◆</span>{s}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {t.gecis && (
+                  <div style={{ marginTop:'16px', padding:'12px 14px', background:'rgba(201,169,110,.06)', border:'1px solid rgba(201,169,110,.15)', fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--gold-d)', lineHeight:1.6 }}>
+                    ↑ {t.gecis}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Geçiş süreci akışı */}
+          <div style={{ background:'var(--bg3)', border:'1px solid var(--border)', padding:'32px 40px' }}>
+            <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.72rem', letterSpacing:'.18em', textTransform:'uppercase', color:'var(--gold-d)', marginBottom:'20px' }}>Üst Kademeye Geçiş Süreci</div>
+            <div style={{ display:'flex', gap:'0', alignItems:'center', flexWrap:'wrap' }}>
+              {[
+                { n:'1', text:'Geçiş Başvurusu yaparsınız (panel üzerinden)' },
+                { n:'2', text:'Belgeleri yüklersiniz (diploma, sertifika, seans kayıtları)' },
+                { n:'3', text:'Komite incelemesi (7–14 gün)' },
+                { n:'4', text:'Onay veya ek bilgi talebi' },
+                { n:'5', text:'Kademe yükseltilir, yeni haklar aktif olur' },
+              ].map((s, i) => (
+                <div key={s.n} style={{ display:'flex', alignItems:'center', gap:'0' }}>
+                  <div style={{ display:'flex', alignItems:'center', gap:'10px', padding:'10px 16px' }}>
+                    <div style={{ width:'28px', height:'28px', borderRadius:'50%', background:'rgba(201,169,110,.15)', border:'1px solid var(--gold-d)', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--gold)', flexShrink:0 }}>{s.n}</div>
+                    <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--text)' }}>{s.text}</span>
+                  </div>
+                  {i < 4 && <span style={{ color:'var(--muted)', fontSize:'.9rem', margin:'0 4px' }}>→</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── KADEME SİSTEMİ ── */}
       <section id="kademe" style={{ padding:'110px 0', background:'var(--bg)' }}>
         <div style={{ maxWidth:'1200px', margin:'0 auto', padding:'0 32px' }}>

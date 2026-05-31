@@ -5,7 +5,11 @@ import Link from 'next/link'
 
 /* ── Types ── */
 type Tier = 'aday' | 'uzman' | 'ustat'
-type Step = 1 | 2 | 3 | 4
+type Step = 1 | 2 | 3 | 4 | 5
+
+interface Certificate {
+  title: string; issuer: string; year: string; type: string
+}
 
 interface FormData {
   // Step 1
@@ -14,15 +18,18 @@ interface FormData {
   // Step 2
   university: string; department: string; gradYear: string; expYears: string
   approach: string; specs: string[]
-  // Step 3
+  // Step 3 — Sertifikalar
+  certificates: Certificate[]
+  // Step 4 — Kademe & Tercihler
   tier: Tier | ''; sessionTypes: string[]; weeklyCapacity: string; mentorPref: string; bio: string
-  // Step 4
+  // Step 5
   agreeTerms: boolean; agreeEthics: boolean; agreeComm: boolean
 }
 
 const INIT: FormData = {
   firstName:'', lastName:'', email:'', password:'', phone:'', city:'', linkedin:'',
   university:'', department:'', gradYear:'', expYears:'', approach:'', specs:[],
+  certificates:[],
   tier:'', sessionTypes:[], weeklyCapacity:'', mentorPref:'', bio:'',
   agreeTerms:false, agreeEthics:false, agreeComm:false,
 }
@@ -30,6 +37,7 @@ const INIT: FormData = {
 const STEPS = [
   { label:'Kişisel Bilgiler',   sub:'Ad, iletişim' },
   { label:'Mesleki Bilgiler',   sub:'Deneyim, uzmanlık' },
+  { label:'Belgeler',           sub:'Diploma, sertifikalar' },
   { label:'Kademe & Tercihler', sub:'Mentörlük, çalışma' },
   { label:'Onay',               sub:'İncele & gönder' },
 ]
@@ -203,9 +211,84 @@ function Step2({ data, set, setSpecs, errors }: { data:FormData; set:(k:keyof Fo
 }
 
 /* ══════════════════════════════════════════
-   STEP 3 — Kademe & Tercihler
+   STEP 3 — Belgeler (diploma, sertifika)
 ══════════════════════════════════════════ */
-function Step3({ data, set, setSessionTypes, errors }: { data:FormData; set:(k:keyof FormData, v:string)=>void; setSessionTypes:(s:string[])=>void; errors:Record<string,string> }) {
+const DOC_TYPES = [
+  { val:'diploma',      label:'Diploma (Lisans/Yüksek Lisans/Doktora)' },
+  { val:'license',      label:'Çalışma Ruhsatı / Yetki Belgesi' },
+  { val:'certificate',  label:'Uzmanlık Sertifikası (BDT, EMDR vb.)' },
+  { val:'membership',   label:'Dernek / Oda Üyeliği' },
+  { val:'supervision',  label:'Süpervizyon Tamamlama Belgesi' },
+  { val:'other',        label:'Diğer' },
+]
+
+function Step3Docs({ data, setCerts }: { data:FormData; setCerts:(c:Certificate[])=>void }) {
+  const addCert = () => setCerts([...data.certificates, { title:'', issuer:'', year:'', type:'diploma' }])
+  const removeCert = (i: number) => setCerts(data.certificates.filter((_, idx) => idx !== i))
+  const updateCert = (i: number, field: keyof Certificate, val: string) => {
+    const updated = [...data.certificates]
+    updated[i] = { ...updated[i], [field]: val }
+    setCerts(updated)
+  }
+
+  return (
+    <>
+      <PanelHeader eyebrow="Adım 3 / 5" title={<>Belgelerinizi <em style={{ fontStyle:'italic', color:'var(--gold)' }}>ekleyin</em></>} desc="Diploma ve sertifikalarınız admin tarafından doğrulanır. Şu an URL veya bilgi girişi yapabilirsiniz — ilerleyen dönemde dosya yükleme aktif edilecek." />
+
+      {/* Diploma zorunlu */}
+      <div style={{ background:'rgba(201,169,110,.06)', border:'1px solid rgba(201,169,110,.18)', padding:'16px 20px', marginBottom:'28px', fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--text)' }}>
+        ◈ &nbsp; <strong style={{ color:'var(--cream)' }}>Diploma bilgisi zorunludur.</strong> Diğer belgeler isteğe bağlı olmakla birlikte Uzman/Üstat kademesine geçiş için gereklidir.
+      </div>
+
+      <div style={{ display:'flex', flexDirection:'column', gap:'20px' }}>
+        {data.certificates.map((cert, i) => (
+          <div key={i} style={{ padding:'24px', background:'var(--bg2)', border:'1px solid var(--border)', position:'relative' }}>
+            <button onClick={() => removeCert(i)} style={{ position:'absolute', top:'16px', right:'16px', background:'none', border:'none', color:'var(--muted)', cursor:'pointer', fontSize:'1rem', lineHeight:1 }}>✕</button>
+            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'14px' }}>
+              <div style={{ gridColumn:'span 2' }}>
+                <label style={labelStyle}>Belge Türü <span style={{ color:'var(--gold)' }}>*</span></label>
+                <select style={{ ...fieldStyle, backgroundImage:`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239e7d4c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")`, backgroundRepeat:'no-repeat', backgroundPosition:'right 14px center', paddingRight:'36px', cursor:'pointer' }}
+                  value={cert.type} onChange={e => updateCert(i, 'type', e.target.value)}>
+                  {DOC_TYPES.map(d => <option key={d.val} value={d.val}>{d.label}</option>)}
+                </select>
+              </div>
+              <div style={{ gridColumn:'span 2' }}>
+                <label style={labelStyle}>Belge Başlığı <span style={{ color:'var(--gold)' }}>*</span></label>
+                <input style={fieldStyle} value={cert.title} onChange={e => updateCert(i, 'title', e.target.value)} placeholder='ör. "Klinik Psikoloji Yüksek Lisans Diploması"'
+                  onFocus={e => (e.target.style.borderColor='var(--gold-d)')} onBlur={e => (e.target.style.borderColor='var(--border)')} />
+              </div>
+              <div>
+                <label style={labelStyle}>Veren Kurum</label>
+                <input style={fieldStyle} value={cert.issuer} onChange={e => updateCert(i, 'issuer', e.target.value)} placeholder='ör. "Boğaziçi Üniversitesi"'
+                  onFocus={e => (e.target.style.borderColor='var(--gold-d)')} onBlur={e => (e.target.style.borderColor='var(--border)')} />
+              </div>
+              <div>
+                <label style={labelStyle}>Veriliş Yılı</label>
+                <input style={fieldStyle} type="number" value={cert.year} onChange={e => updateCert(i, 'year', e.target.value)} placeholder="2018"
+                  onFocus={e => (e.target.style.borderColor='var(--gold-d)')} onBlur={e => (e.target.style.borderColor='var(--border)')} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button onClick={addCert} className="btn btn-outline btn-sm" style={{ marginTop:'16px', width:'100%', justifyContent:'center' }}>
+        + Belge / Sertifika Ekle
+      </button>
+
+      {data.certificates.length === 0 && (
+        <div style={{ textAlign:'center', padding:'24px 0' }}>
+          <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--muted)' }}>Henüz belge eklenmedi. Diploma bilginizi mutlaka ekleyin.</p>
+        </div>
+      )}
+    </>
+  )
+}
+
+/* ══════════════════════════════════════════
+   STEP 4 — Kademe & Tercihler (eski Step 3)
+══════════════════════════════════════════ */
+function Step4Kademe({ data, set, setSessionTypes, errors }: { data:FormData; set:(k:keyof FormData, v:string)=>void; setSessionTypes:(s:string[])=>void; errors:Record<string,string> }) {
   const expN = parseInt(data.expYears) || 0
   const suggested: Tier = expN <= 2 ? 'aday' : expN < 10 ? 'uzman' : 'ustat'
 
@@ -215,7 +298,7 @@ function Step3({ data, set, setSessionTypes, errors }: { data:FormData; set:(k:k
 
   return (
     <>
-      <PanelHeader eyebrow="Adım 3 / 4" title={<>Kademe & <em style={{ fontStyle:'italic', color:'var(--gold)' }}>Tercihler</em></>} desc="Deneyiminize göre önerilen kademedeki yerinizi alın." />
+      <PanelHeader eyebrow="Adım 4 / 5" title={<>Kademe & <em style={{ fontStyle:'italic', color:'var(--gold)' }}>Tercihler</em></>} desc="Deneyiminize göre önerilen kademedeki yerinizi alın." />
 
       {/* Tier suggestion banner */}
       <div style={{ display:'flex', alignItems:'center', gap:'10px', background:'rgba(201,169,110,.07)', border:'1px solid rgba(201,169,110,.18)', padding:'12px 18px', marginBottom:'22px', fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--gold)' }}>
@@ -300,11 +383,11 @@ function Step3({ data, set, setSessionTypes, errors }: { data:FormData; set:(k:k
 /* ══════════════════════════════════════════
    STEP 4 — Onay & İnceleme
 ══════════════════════════════════════════ */
-function Step4({ data, set, errors }: { data:FormData; set:(k:keyof FormData, v:string|boolean)=>void; errors:Record<string,string> }) {
+function Step5Onay({ data, set, errors }: { data:FormData; set:(k:keyof FormData, v:string|boolean)=>void; errors:Record<string,string> }) {
   const tierInfo = TIER_INFO.find(t => t.val === data.tier)
   return (
     <>
-      <PanelHeader eyebrow="Adım 4 / 4" title={<>İnceleyin & <em style={{ fontStyle:'italic', color:'var(--gold)' }}>onaylayın</em></>} desc="Bilgilerinizi kontrol edin. Başvurunuz 24 saat içinde incelenir." />
+      <PanelHeader eyebrow="Adım 5 / 5" title={<>İnceleyin & <em style={{ fontStyle:'italic', color:'var(--gold)' }}>onaylayın</em></>} desc="Bilgilerinizi kontrol edin. Başvurunuz 24 saat içinde incelenir." />
 
       {/* Review sections */}
       <ReviewSection title="Kişisel Bilgiler">
@@ -456,8 +539,9 @@ export default function RegisterForm() {
     setErrors(prev => { const n = { ...prev }; delete n[k as string]; return n })
   }, [])
 
-  const setSpecs = useCallback((s: string[]) => setData(prev => ({ ...prev, specs: s })), [])
+  const setSpecs        = useCallback((s: string[]) => setData(prev => ({ ...prev, specs: s })), [])
   const setSessionTypes = useCallback((s: string[]) => setData(prev => ({ ...prev, sessionTypes: s })), [])
+  const setCerts        = useCallback((c: Certificate[]) => setData(prev => ({ ...prev, certificates: c })), [])
 
   /* Validation */
   function validate(): boolean {
@@ -478,12 +562,17 @@ export default function RegisterForm() {
       if (!data.approach) e.approach = 'Zorunlu alan'
       if (data.specs.length === 0) e.specs = 'En az bir uzmanlık alanı seçin'
     }
+    // Step 3: belgeler — diploma zorunlu
     if (step === 3) {
+      const hasDiploma = data.certificates.some(c => c.type === 'diploma' && c.title.trim().length > 0)
+      if (!hasDiploma) e.certs = 'En az bir diploma bilgisi girmelisiniz'
+    }
+    if (step === 4) {
       if (!data.tier) e.tier = 'Kademe seçiniz'
       if (data.sessionTypes.length === 0) e.sessionTypes = 'En az bir seans türü seçin'
       if (data.bio.trim().length < 10) e.bio = 'En az 10 karakter yazın'
     }
-    if (step === 4) {
+    if (step === 5) {
       if (!data.agreeTerms || !data.agreeEthics) e.agree = 'Zorunlu sözleşmeleri kabul etmeniz gerekiyor'
     }
     setErrors(e)
@@ -492,7 +581,7 @@ export default function RegisterForm() {
 
   async function handleNext() {
     if (!validate()) return
-    if (step < 4) { setStep((step + 1) as Step); return }
+    if (step < 5) { setStep((step + 1) as Step); return }
 
     // Submit
     setLoading(true); setApiError('')
@@ -531,7 +620,7 @@ export default function RegisterForm() {
     }
   }
 
-  const progressPct = (step / 4) * 100
+  const progressPct = (step / 5) * 100
 
   return (
     <div style={{ display:'grid', gridTemplateColumns:'280px 1fr', minHeight:'100vh' }}>
@@ -597,8 +686,9 @@ export default function RegisterForm() {
               {/* Form content */}
               {step === 1 && <Step1 data={data} set={set} errors={errors} />}
               {step === 2 && <Step2 data={data} set={set} setSpecs={setSpecs} errors={errors} />}
-              {step === 3 && <Step3 data={data} set={set} setSessionTypes={setSessionTypes} errors={errors} />}
-              {step === 4 && <Step4 data={data} set={set} errors={errors} />}
+              {step === 3 && <Step3Docs data={data} setCerts={setCerts} />}
+              {step === 4 && <Step4Kademe data={data} set={set} setSessionTypes={setSessionTypes} errors={errors} />}
+              {step === 5 && <Step5Onay data={data} set={set} errors={errors} />}
 
               {/* API error */}
               {apiError && (
@@ -621,7 +711,7 @@ export default function RegisterForm() {
                   disabled={loading}
                   className="btn btn-gold btn-md"
                 >
-                  {loading ? 'Gönderiliyor…' : step === 4 ? 'Başvuruyu Gönder ✦' : 'İleri →'}
+                  {loading ? 'Gönderiliyor…' : step === 5 ? 'Başvuruyu Gönder ✦' : 'İleri →'}
                 </button>
               </div>
             </>
