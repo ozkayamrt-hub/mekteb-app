@@ -16,6 +16,7 @@ const NAV = [
   { href: '/panel/randevular',       icon: '◷', label: 'Randevular' },
   { href: '/panel/danisanlar',       icon: '⟁', label: 'Danışanlar' },
   { href: '/panel/mentorluk',        icon: '⬡', label: 'Mentörlük' },
+  { href: '/panel/supervizyon',      icon: '⟁', label: 'Süpervizyon' },
   { href: '/panel/takvim',           icon: '◷', label: 'Takvimim' },
   { href: '/panel/kademe-yukselt',   icon: '↑', label: 'Kademe Yükselt' },
   { href: '/panel/profil',           icon: '◎', label: 'Profilim' },
