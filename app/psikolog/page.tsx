@@ -434,6 +434,14 @@ export default function PsikologPage() {
         ))}
         <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'200px', height:'200px', borderRadius:'50%', background:'radial-gradient(ellipse,rgba(201,169,110,.1) 0%,transparent 70%)', animation:'breathe 4s ease-in-out infinite' }} />
         <div style={{ maxWidth:'660px', margin:'0 auto', textAlign:'center', padding:'0 32px', position:'relative', zIndex:1 }}>
+          {/* Pre-launch rozeti — yanıp sönen */}
+          <div style={{ display:'inline-flex', alignItems:'center', gap:'10px', marginBottom:'24px' }}>
+            <div style={{ background:'var(--gold)', color:'#090f0c', fontFamily:'Cormorant Garant,serif', fontWeight:700, fontSize:'.72rem', letterSpacing:'.18em', textTransform:'uppercase', padding:'6px 18px', animation:'badgePulse 1.8s ease-out infinite' }}>
+              ÜCRETSİZ ERKEN KAYIT
+            </div>
+          </div>
+          <style>{`@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.6)}50%{box-shadow:0 0 0 10px rgba(201,169,110,0)}}`}</style>
+
           <div className="eyebrow" style={{ marginBottom:'12px' }}>Kurucu Üyelik</div>
           <div style={{ width:'40px', height:'1px', background:'var(--gold)', margin:'0 auto 24px' }} />
           <h2 style={{ fontSize:'clamp(2rem,4vw,3.6rem)', fontWeight:400, marginBottom:'20px' }}>
@@ -442,14 +450,22 @@ export default function PsikologPage() {
           <p style={{ fontSize:'1.05rem', color:'var(--text)', marginBottom:'16px', lineHeight:1.8 }}>
             İlk 100 psikolog arasına girin. Kurucu üyeler fiyat garantisi, özel rozet ve topluluk kararlarında oy hakkı kazanır.
           </p>
-          <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--gold)', marginBottom:'40px', letterSpacing:'.04em' }}>
-            ✦ &nbsp; Tek bir seansta aidatınızı karşılarsınız
-          </p>
+
+          {/* Pre-launch bilgi kutusu */}
+          <div style={{ background:'rgba(201,169,110,.08)', border:'1px solid rgba(201,169,110,.25)', padding:'16px 20px', marginBottom:'28px', textAlign:'left' }}>
+            <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)', lineHeight:1.7 }}>
+              <strong style={{ color:'var(--cream)', display:'block', marginBottom:'4px' }}>
+                🎯 &nbsp; Site açılana kadar aidat yok
+              </strong>
+              Şimdi kaydolun, talep toplama sürecine dahil olun. Platform hizmet vermeye başladığında size bildirim gönderilecek ve aidat o günden itibaren başlayacak. Kurucu üye olarak fiyat kilidi garantiniz var.
+            </div>
+          </div>
+
           <Link href="/kayit" className="btn btn-gold btn-lg" style={{ fontSize:'1.1rem', padding:'16px 52px' }}>
-            Psikolog Olarak Başvur →
+            Ücretsiz Başvur →
           </Link>
           <p style={{ marginTop:'16px', fontFamily:'Cormorant Garant,serif', fontSize:'.8rem', color:'var(--muted)' }}>
-            Kayıt formunuz 24 saat içinde incelenir
+            Kayıt formunuz 24 saat içinde incelenir · Aidat site açılışında başlar
           </p>
 
           {/* Meslektaş davet */}

@@ -526,6 +526,17 @@ function SuccessScreen() {
 
       <div style={{ width:'72px', height:'72px', border:'1px solid var(--gold-d)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 28px', fontSize:'1.8rem', color:'var(--gold)', boxShadow:'0 0 40px rgba(201,169,110,.12)' }}>✦</div>
       <h2 style={{ fontSize:'2.2rem', fontWeight:400, marginBottom:'16px' }}>Başvurunuz <em style={{ fontStyle:'italic', color:'var(--gold)' }}>alındı</em></h2>
+
+      {/* Pre-launch bilgisi */}
+      <div style={{ background:'rgba(201,169,110,.1)', border:'1px solid rgba(201,169,110,.3)', padding:'16px 20px', maxWidth:'440px', margin:'0 auto 20px', textAlign:'left' }}>
+        <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--gold)', fontWeight:500, marginBottom:'6px' }}>
+          ✦ Ücretsiz Erken Kayıt
+        </div>
+        <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--text)', lineHeight:1.65 }}>
+          Şu an aidat ödemiyorsunuz. Platform hizmet vermeye başladığında e-posta ile bildirim alacak ve o günden itibaren aidat ödeyeceksiniz.
+        </p>
+      </div>
+
       <p style={{ fontSize:'1rem', color:'var(--text)', maxWidth:'420px', margin:'0 auto 28px' }}>
         Mekteb ailesine hoş geldiniz. E-postanızı doğruladıktan sonra başvurunuz incelenecek.
       </p>
@@ -647,7 +658,43 @@ export default function RegisterForm() {
   const progressPct = (step / 5) * 100
 
   return (
-    <div className="r-sidebar" style={{ display:'grid', gridTemplateColumns:'280px 1fr', minHeight:'100vh' }}>
+    <div style={{ minHeight:'100vh', display:'flex', flexDirection:'column' }}>
+
+      {/* ── PRE-LAUNCH BANNER — Yanıp sönen ── */}
+      <div style={{
+        background:'rgba(201,169,110,.12)',
+        borderBottom:'2px solid var(--gold)',
+        padding:'14px 24px',
+        display:'flex', alignItems:'center', justifyContent:'center', gap:'16px',
+        position:'relative', overflow:'hidden',
+      }}>
+        {/* Tarama efekti */}
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(90deg,transparent 0%,rgba(201,169,110,.08) 50%,transparent 100%)', backgroundSize:'200% 100%', animation:'bannerShine 3s linear infinite' }} />
+        <style>{`
+          @keyframes bannerShine { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+          @keyframes badgePulse { 0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.6)} 50%{box-shadow:0 0 0 8px rgba(201,169,110,0)} }
+        `}</style>
+
+        {/* Yanıp sönen rozet */}
+        <div style={{
+          background:'var(--gold)', color:'#090f0c',
+          fontFamily:'Cormorant Garant,serif', fontWeight:700,
+          fontSize:'.72rem', letterSpacing:'.18em', textTransform:'uppercase',
+          padding:'5px 14px', whiteSpace:'nowrap', flexShrink:0,
+          animation:'badgePulse 1.8s ease-out infinite',
+        }}>
+          ÜCRETSİZ ERKEN KAYIT
+        </div>
+
+        <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--cream)', lineHeight:1.5 }}>
+          <strong>Site açılana kadar aidat yok.</strong>{' '}
+          <span style={{ color:'var(--text)' }}>
+            Şimdi kaydolun, talep toplama sürecine dahil olun. Platform açıldığında size bildirim göndereceğiz, aidat o günden itibaren başlar.
+          </span>
+        </div>
+      </div>
+
+    <div className="r-sidebar" style={{ display:'grid', gridTemplateColumns:'280px 1fr', flex:1 }}>
 
       {/* ── Sidebar ── */}
       <aside style={{ background:'var(--bg2)', borderRight:'1px solid var(--border)', display:'flex', flexDirection:'column', padding:'48px 32px', position:'sticky', top:0, height:'100vh', overflow:'hidden' }}>
@@ -742,6 +789,7 @@ export default function RegisterForm() {
           )}
         </div>
       </main>
+    </div>
     </div>
   )
 }
