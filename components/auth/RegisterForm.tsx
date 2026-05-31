@@ -353,17 +353,28 @@ function Step4Kademe({ data, set, setSessionTypes, errors }: { data:FormData; se
         </Field>
       </div>
 
-      <Divider label="Mentörlük Tercihi" />
-      <div style={{ display:'flex', flexDirection:'column', gap:'12px', marginBottom:'28px' }}>
-        {MENTOR_PREFS.map(mp => (
-          <label key={mp.val} style={{ display:'flex', alignItems:'flex-start', gap:'14px', cursor:'pointer' }}>
-            <input type="radio" name="mentor" value={mp.val} checked={data.mentorPref === mp.val} onChange={() => set('mentorPref', mp.val)} style={{ width:'16px', height:'16px', flexShrink:0, marginTop:'3px', accentColor:'var(--gold)', cursor:'pointer' }} />
-            <div>
-              <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1rem', color:'var(--cream)', fontWeight:500 }}>{mp.label}</div>
-              <div style={{ fontSize:'.83rem', color:'var(--text)', marginTop:'2px' }}>{mp.desc}</div>
-            </div>
-          </label>
-        ))}
+      <Divider label="Mentörlük" />
+      {/* Mentor atama sistem tarafından otomatik yapılır */}
+      <div style={{ display:'flex', alignItems:'flex-start', gap:'12px', background:'rgba(201,169,110,.06)', border:'1px solid rgba(201,169,110,.18)', padding:'16px 20px', marginBottom:'20px' }}>
+        <span style={{ color:'var(--gold)', fontSize:'1.1rem', flexShrink:0 }}>⬡</span>
+        <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--text)', lineHeight:1.65 }}>
+          <strong style={{ color:'var(--cream)', display:'block', marginBottom:'4px' }}>Mentor ataması otomatiktir</strong>
+          Aday kademesinde mentor zorunludur. Başvurunuz onaylandığında sistem, aktif Üstatlar arasında uygun olanı otomatik olarak atar. Herhangi bir seçim yapmanıza gerek yoktur.
+        </div>
+      </div>
+      <div style={{ marginBottom:'28px' }}>
+        <label style={{ ...labelStyle, marginBottom:'12px' }}>İleride mentor olmak ister misiniz?</label>
+        <div style={{ display:'flex', gap:'12px' }}>
+          {[
+            { val:'evet', label:'Evet — ileride Üstat olarak mentor olmayı hedefliyorum' },
+            { val:'hayir', label:'Şimdilik önceliğim kendi pratiğimi geliştirmek' },
+          ].map(opt => (
+            <label key={opt.val} style={{ flex:1, display:'flex', alignItems:'flex-start', gap:'10px', cursor:'pointer', padding:'12px 14px', border:`1px solid ${data.mentorPref === opt.val ? 'var(--gold)' : 'var(--border)'}`, background: data.mentorPref === opt.val ? 'rgba(201,169,110,.06)' : 'transparent', transition:'all .2s' }}>
+              <input type="radio" name="mentor" value={opt.val} checked={data.mentorPref === opt.val} onChange={() => set('mentorPref', opt.val)} style={{ width:'15px', height:'15px', flexShrink:0, marginTop:'2px', accentColor:'var(--gold)', cursor:'pointer' }} />
+              <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--text)', lineHeight:1.5 }}>{opt.label}</span>
+            </label>
+          ))}
+        </div>
       </div>
 
       <Field label="Kısa Tanıtım" req error={errors.bio} hint="Danışanlara profilinizde gösterilir. Maksimum 300 karakter.">

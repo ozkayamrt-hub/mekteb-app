@@ -204,7 +204,7 @@ export default function PsikologPage() {
                   '0–2 yıl mesleki deneyim',
                 ],
                 sinirlamalar:[
-                  'Mentor zorunludur — mentörsüz aktif olamaz',
+                  'Mentor sistem tarafından otomatik atanır',
                   'En fazla 5 aktif danışan',
                   'Bağımsız seans notu tutamaz (süpervizyon altında)',
                 ],
