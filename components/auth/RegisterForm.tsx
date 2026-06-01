@@ -530,10 +530,10 @@ function SuccessScreen() {
       {/* Pre-launch bilgisi */}
       <div style={{ background:'rgba(201,169,110,.1)', border:'1px solid rgba(201,169,110,.3)', padding:'16px 20px', maxWidth:'440px', margin:'0 auto 20px', textAlign:'left' }}>
         <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--gold)', fontWeight:500, marginBottom:'6px' }}>
-          ✦ Ücretsiz Erken Kayıt
+          ✦ İlk 6 Ay Ücretsiz
         </div>
         <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--text)', lineHeight:1.65 }}>
-          Şu an aidat ödemiyorsunuz. Platform hizmet vermeye başladığında e-posta ile bildirim alacak ve o günden itibaren aidat ödeyeceksiniz.
+          Platform açıldıktan sonra ilk 6 ay boyunca hiç aidat ödemiyorsunuz. İlk 100 kurucu üye olarak fiyat kilidi garantiniz ömür boyu geçerlidir.
         </p>
       </div>
 
@@ -683,13 +683,13 @@ export default function RegisterForm() {
           padding:'5px 14px', whiteSpace:'nowrap', flexShrink:0,
           animation:'badgePulse 1.8s ease-out infinite',
         }}>
-          ÜCRETSİZ ERKEN KAYIT
+          İLK 6 AY ÜCRETSİZ
         </div>
 
         <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.9rem', color:'var(--cream)', lineHeight:1.5 }}>
-          <strong>Site açılana kadar aidat yok.</strong>{' '}
+          <strong>Açılıştan sonra 6 ay ücretsiz.</strong>{' '}
           <span style={{ color:'var(--text)' }}>
-            Şimdi kaydolun, talep toplama sürecine dahil olun. Platform açıldığında size bildirim göndereceğiz, aidat o günden itibaren başlar.
+            Kaydolun, talep toplama sürecine dahil olun. Platform açıldığında ilk 6 ay boyunca hiç aidat ödemezsiniz. İlk 100 kurucu üyenin fiyat kilidi ömür boyu geçerlidir.
           </span>
         </div>
       </div>

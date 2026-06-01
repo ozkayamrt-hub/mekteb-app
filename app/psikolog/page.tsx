@@ -439,7 +439,7 @@ export default function PsikologPage() {
           {/* Pre-launch rozeti — yanıp sönen */}
           <div style={{ display:'inline-flex', alignItems:'center', gap:'10px', marginBottom:'24px' }}>
             <div style={{ background:'var(--gold)', color:'#090f0c', fontFamily:'Cormorant Garant,serif', fontWeight:700, fontSize:'.72rem', letterSpacing:'.18em', textTransform:'uppercase', padding:'6px 18px', animation:'badgePulse 1.8s ease-out infinite' }}>
-              ÜCRETSİZ ERKEN KAYIT
+              İLK 6 AY ÜCRETSİZ
             </div>
           </div>
           <style>{`@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.6)}50%{box-shadow:0 0 0 10px rgba(201,169,110,0)}}`}</style>
@@ -457,9 +457,9 @@ export default function PsikologPage() {
           <div style={{ background:'rgba(201,169,110,.08)', border:'1px solid rgba(201,169,110,.25)', padding:'16px 20px', marginBottom:'28px', textAlign:'left' }}>
             <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)', lineHeight:1.7 }}>
               <strong style={{ color:'var(--cream)', display:'block', marginBottom:'4px' }}>
-                🎯 &nbsp; Site açılana kadar aidat yok
+                🎯 &nbsp; Açılıştan sonra 6 ay boyunca aidat yok
               </strong>
-              Şimdi kaydolun, talep toplama sürecine dahil olun. Platform hizmet vermeye başladığında size bildirim gönderilecek ve aidat o günden itibaren başlayacak. Kurucu üye olarak fiyat kilidi garantiniz var.
+              Şimdi kaydolun, talep toplama sürecine dahil olun. Platform açıldığında size bildirim gönderilecek, ilk 6 ay tamamen ücretsiz çalışacaksınız. İlk 100 kurucu üye olarak fiyat kilidi garantiniz ömür boyu geçerlidir.
             </div>
           </div>
 
