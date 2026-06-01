@@ -493,18 +493,12 @@ export default function PsikologPage() {
             <div className="eyebrow" style={{ marginBottom:'8px' }}>Destek</div>
             <h2 style={{ fontSize:'clamp(1.5rem,3vw,2.2rem)', fontWeight:400 }}>Sorularınız için <em style={{ fontStyle:'italic', color:'var(--gold)' }}>buradayız</em></h2>
           </div>
-          <div className="r-grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'16px' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'16px', maxWidth:'560px', margin:'0 auto' }}>
             <div className="card" style={{ padding:'24px', textAlign:'center' }}>
               <div style={{ fontSize:'1.6rem', marginBottom:'10px' }}>✉</div>
               <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1rem', color:'var(--cream)', marginBottom:'6px' }}>E-posta</h3>
               <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)', marginBottom:'12px', lineHeight:1.6 }}>Kayıt ve üyelik soruları</p>
               <a href="mailto:info@mekteb.com.tr" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--gold)', textDecoration:'none' }}>info@mekteb.com.tr</a>
-            </div>
-            <div style={{ padding:'24px', background:'rgba(37,211,102,.05)', border:'1px solid rgba(37,211,102,.2)', textAlign:'center' }}>
-              <div style={{ fontSize:'1.6rem', marginBottom:'10px' }}>📱</div>
-              <h3 style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1rem', color:'var(--cream)', marginBottom:'6px' }}>WhatsApp</h3>
-              <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)', marginBottom:'12px', lineHeight:1.6 }}>Hızlı sorular için</p>
-              <a href="https://wa.me/905XXXXXXXXX" target="_blank" rel="noopener noreferrer" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'#25d366', textDecoration:'none' }}>WhatsApp'ta Yaz →</a>
             </div>
             <div className="card" style={{ padding:'24px', textAlign:'center' }}>
               <div style={{ fontSize:'1.6rem', marginBottom:'10px' }}>💬</div>
