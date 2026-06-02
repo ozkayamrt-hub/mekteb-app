@@ -473,6 +473,10 @@ export default function PsikologPage() {
               İlk 100 kurucu üyenin fiyat kilidi ömür boyu garantilidir.
             </p>
           </div>
+          {/* Kurucu üye sayacı */}
+          <div style={{ maxWidth:'860px', margin:'16px auto 0' }}>
+            <FounderCounter />
+          </div>
         </div>
       </section>
 
@@ -499,9 +503,6 @@ export default function PsikologPage() {
           <p style={{ fontSize:'1.05rem', color:'var(--text)', marginBottom:'24px', lineHeight:1.8 }}>
             İlk 100 psikolog arasına girin. Kurucu üyeler fiyat garantisi, özel rozet ve topluluk kararlarında oy hakkı kazanır.
           </p>
-
-          {/* Kurucu üye sayacı */}
-          <FounderCounter />
 
           {/* Pre-launch bilgi kutusu */}
           <div style={{ background:'rgba(201,169,110,.08)', border:'1px solid rgba(201,169,110,.25)', padding:'16px 20px', marginBottom:'28px', textAlign:'left' }}>
