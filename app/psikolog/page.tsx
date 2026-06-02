@@ -330,7 +330,10 @@ export default function PsikologPage() {
                   ))}
                 </ul>
                 <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-                  <span style={{ padding:'4px 14px', border:'1px solid var(--border-h)', fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--gold-d)' }}>{t.price} / ay</span>
+                  <div>
+                    <span style={{ padding:'4px 14px', border:'1px solid rgba(201,169,110,.4)', background:'rgba(201,169,110,.08)', fontFamily:'Cormorant Garant,serif', fontSize:'.88rem', color:'var(--gold)', fontWeight:600 }}>0₺ / ay</span>
+                    <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.7rem', color:'var(--muted)', marginTop:'4px', textDecoration:'line-through' }}>Sonrası {t.price}</div>
+                  </div>
                   <Link href="/kayit" style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--gold)', textDecoration:'none' }}>Başvur →</Link>
                 </div>
               </div>
@@ -407,11 +410,16 @@ export default function PsikologPage() {
               <div key={p.tier} className="tier-card" style={{ border:`1px solid ${p.featured ? 'rgba(201,169,110,.4)' : 'var(--border)'}`, background: p.featured ? 'var(--bg3)' : 'var(--bg2)', padding:'44px 36px', position:'relative' }}>
                 {p.featured && <div style={{ position:'absolute', top:'-12px', left:'50%', transform:'translateX(-50%)', background:'var(--gold)', color:'#090f0c', fontFamily:'Cormorant Garant,serif', fontSize:'.72rem', fontWeight:600, letterSpacing:'.12em', textTransform:'uppercase', padding:'3px 16px', whiteSpace:'nowrap' }}>Önerilen</div>}
                 <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', letterSpacing:'.14em', textTransform:'uppercase', color: p.featured ? 'var(--gold)' : 'var(--gold-d)', marginBottom:'16px' }}>{p.tier} Üyelik</div>
-                <div style={{ display:'flex', alignItems:'baseline', gap:'4px', marginBottom:'6px' }}>
+                <div style={{ display:'flex', alignItems:'baseline', gap:'4px', marginBottom:'4px' }}>
                   <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.2rem', color:'var(--gold)' }}>₺</span>
-                  <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'3.4rem', fontWeight:300, color:'var(--cream)', lineHeight:1 }}>{p.price}</span>
+                  <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'3.4rem', fontWeight:300, color:'var(--cream)', lineHeight:1 }}>0</span>
                 </div>
-                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.8rem', color:'var(--muted)', marginBottom:'28px', letterSpacing:'.06em' }}>/ aylık · KDV dahil</div>
+                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)', marginBottom:'6px', letterSpacing:'.06em' }}>
+                  / aylık · İlk 6 ay ücretsiz
+                </div>
+                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)', marginBottom:'20px', textDecoration:'line-through' }}>
+                  Sonrası {p.price}₺/ay
+                </div>
                 <div style={{ height:'1px', background:'var(--border)', marginBottom:'24px' }} />
                 <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:'12px', marginBottom:'32px' }}>
                   {p.features.map(f => (

@@ -1,49 +1,46 @@
-# Mekteb — Psikolog Davet E-postası
+# Mekteb — Psikolog Davet E-postası (Haziran 2026)
 
-## Konu Satırı Seçenekleri (A/B test edin)
+## Konu Satırı Seçenekleri
 - "Türkiye'nin ilk psikolog topluluğuna ücretsiz katılın"
-- "Komisyon sıfır. Ağızdan ağıza değil, sistematik danışan."
-- "Yeni mezun mu? Üstat arıyor musunuz? Mekteb açılıyor."
+- "Komisyon sıfır. İlk 6 ay tamamen ücretsiz."
+- "Yeni mezun mu? Üstat arıyor musunuz? Mekteb açıldı."
 - "[AD], sizi Mekteb'e davet ediyorum"
 
 ---
 
-## E-posta Metni — Versiyon A (Kısa, Direkt)
+## Versiyon A — Kısa & Direkt (Genel psikolog)
 
-**Konu:** Türkiye'nin ilk psikolog topluluğuna ücretsiz kaydolun
+**Konu:** İlk 6 ay ücretsiz — Türkiye'nin ilk psikolog topluluğu
 
 ---
 
 Merhaba [AD SOYAD],
 
-Mekteb'i kuruyoruz: Türkiye'de psikologların hem danışan bulduğu hem de mesleki olarak büyüdüğü bir platform.
+Mekteb'i açtık: Türkiye'de psikologların hem danışan bulduğu hem de mesleki olarak büyüdüğü bir platform.
 
 **Fark ne?**
 
-Diğer siteler sizi listeler, gider. Mekteb farklı çalışıyor:
+→ **Komisyon sıfır.** Her seanstan kazandığınızın tamamı size kalır.
 
-→ **Komisyon sıfır.** Her seanstan kazandığınızın tamamı size kalır. Platform yalnızca aylık sabit üyelik alır.
+→ **İlk 6 ay ücretsiz.** Platform açıldı — ilk 6 ay boyunca hiç aidat yok.
 
-→ **Mentörlük sistemi.** Yeni mezunlar deneyimli psikologlardan öğrenir. Uzman psikologlar iz bırakır. Türkiye'de başka yerde yok.
+→ **İlk 100 kurucu üye.** Fiyat kilidi garantisi, özel rozet, topluluk kararlarında oy hakkı.
 
-→ **Şu an ücretsiz.** Platform açılana kadar hiç aidat yok. Kaydolun, bekleme listesine girin. Açıldığında size özel bildirim gönderiyoruz.
+→ **Mentörlük sistemi.** Yeni mezunlar deneyimli psikologlardan öğrenir. Türkiye'de başka yerde yok.
 
-**Nasıl çalışıyor?**
+Kayıt olmak 3 dakika alıyor:
 
-Danışan siteye giriyor → sizi buluyor → randevu talep ediyor → platform içinde mesajlaşıyorsunuz → seans gerçekleşiyor. Kişisel bilgiler paylaşılmıyor, KVKK kapsamında.
-
-Şu an psikolog kabulündeyiz. Açılışta kurucu üye olarak fiyat kilidi garantisi alacaksınız.
-
-[KAYIT OL → mekteb.vercel.app/kayit]
+**→ mekteb.com.tr/kayit**
 
 Sorularınız için: info@mekteb.com.tr
 
-Saygılarımla,  
-[İMZA]
+Saygılarımla,
+Murat Özkaya
+Mekteb Kurucu
 
 ---
 
-## E-posta Metni — Versiyon B (Duygusal, Hikayeli)
+## Versiyon B — Duygusal (Yeni mezun / Aday psikolog)
 
 **Konu:** Mezun oldunuz. Şimdi ne?
 
@@ -57,22 +54,21 @@ Ve şimdi gerçekle yüzleşiyorsunuz: danışan bulmak için Instagram, ağızd
 
 Biz bunun değişmesi gerektiğini düşünüyoruz.
 
-**Mekteb:** Psikologların birbirinden öğrendiği, danışan bulduğu ve komisyon ödemediği bir topluluk.
+**Mekteb:** Psikologların birbirinden öğrendiği, danışan bulduğu ve komisyon ödemediği topluluk.
 
-Aylık sabit üyelik. Seans başına sıfır kesinti. Ve en önemlisi — deneyimli ustalar, yeni mezunlara seanslarını açıyor.
+- Aylık sabit üyelik, seans başına sıfır kesinti
+- Deneyimli üstatlar, yeni mezunlara seanslarını açıyor
+- **İlk 6 ay tamamen ücretsiz**
 
-Şu an bekleme listesindeyiz. Kaydolun, açılışta ilk haberdar olan siz olun.
+**→ mekteb.com.tr/kayit**
 
-[KAYIT OL → mekteb.vercel.app/kayit]
-
-Açılışa kadar hiç ücret yok.
-
-Saygılarımla,  
-[İMZA]
+Saygılarımla,
+Murat Özkaya
+Mekteb Kurucu
 
 ---
 
-## E-posta Metni — Versiyon C (Üstat/Deneyimli Psikolog için)
+## Versiyon C — Deneyimli Psikolog / Üstat
 
 **Konu:** 10 yıllık deneyiminiz, genç psikologların rehberi olabilir
 
@@ -80,39 +76,51 @@ Saygılarımla,
 
 Merhaba [AD SOYAD],
 
-[X] yıllık klinik deneyiminizle, bir şeyin farkındasınızdır: iyi bir üstat yetişmiş olmak, kitaptan çok şey öğretir.
+[X] yıllık klinik deneyiminizle bir şeyin farkındasınızdır: iyi bir üstat, kitaptan çok şey öğretir.
 
 Mekteb'de deneyimli psikologlar iki şey yapıyor:
 
-**1. Mentorluk:** Aday psikologlar 5 tercih yapıyor, siz kaul veya ret ediyorsunuz. Seanslarınıza gözlemci alabiliyorsunuz.
+**1. Mentörlük:** Aday psikologlar size başvuruyor, siz kabul veya red ediyorsunuz. Seanslarınıza gözlemci alabiliyorsunuz.
 
 **2. Danışan:** Sistem deneyiminize ve uzmanlığınıza göre size danışan yönlendiriyor.
 
-Komisyon sıfır. Aylık sabit aidat. Açılışa kadar ücretsiz.
+Komisyon sıfır. İlk 6 ay ücretsiz. İlk 100 arasına girerseniz fiyat kilidi ömür boyu.
 
-[KAYIT OL → mekteb.vercel.app/kayit]
+**→ mekteb.com.tr/kayit**
+
+Saygılarımla,
+Murat Özkaya
+Mekteb Kurucu
 
 ---
 
 ## Gönderim Stratejisi
 
-### Kimler listede olmalı?
-1. TPD (Türk Psikologlar Derneği) üye listesi — resmi başvuru yapın
-2. LinkedIn'de "klinik psikolog" araması → 1. derece bağlantılar
-3. Üniversite klinik psikoloji mezunları — LinkedIn
-4. Instagram'da aktif psikolog hesapları (DM)
-5. WhatsApp psikolog grupları
-6. Üniversite mezun dernekleri
+### Hafta 1 — Tanıdıklar (Sıcak liste)
+- Doğrudan tanıdığınız psikologlar
+- Üniversiteden hocalar / mezun arkadaşlar
+- Kendi danışanınıza supervizyon yapan psikologlar
+- **Hedef:** 10-15 kayıt
 
-### Gönderim sırası
-- Hafta 1: Tanıdık psikologlar (güvenilir ilk referanslar)
-- Hafta 2: LinkedIn bağlantıları
-- Hafta 3: Instagram DM + soğuk e-posta
-- Hafta 4: TPD ve üniversite kanalları
+### Hafta 2 — LinkedIn
+- "klinik psikolog" araması → 1. derece bağlantılar
+- Profil görüntüleyenlere mesaj
+- **Hedef:** 20-30 kayıt
+
+### Hafta 3 — Instagram DM
+- Aktif psikolog hesaplarına (1000-10K takipçi arası)
+- Kısa, samimi mesaj — spam değil
+- **Hedef:** 20-30 kayıt
+
+### Hafta 4 — Kurumsal
+- TPD (Türk Psikologlar Derneği) — duyuru talebi
+- Üniversite klinik psikoloji bölümleri
+- Psikolog WhatsApp grupları
+- **Hedef:** 30-50 kayıt
+
+### Takip (3 gün sonra)
+> "[AD], Mekteb kaydı için tek satır — uygun musunuz?"
 
 ### Hedef
-İlk ay: 30 kayıt → 10 aktif psikolog onayı → Bunları referans göstererek sonraki dalgayı çek
-
-### Takip
-3 gün sonra yanıt gelmezse tek satır:
-> "[AD], Mekteb kaydı hakkında bir şey sormak istedim — uygun musunuz?"
+- İlk ay: 50 kayıt başvurusu → 20 onaylı aktif psikolog
+- İlk 3 ay: 100 kurucu üye tamamlandı
