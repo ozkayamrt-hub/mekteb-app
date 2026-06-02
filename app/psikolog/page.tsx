@@ -1,11 +1,37 @@
 'use client'
 
+import React from 'react'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import FeedbackButton from '@/components/FeedbackButton'
 import PublicNavbar from '@/components/layout/PublicNavbar'
 import { DoveFlock, LaurelBranch, FloatingLeaves, OrnamentalDivider } from '@/components/effects/PageEffects'
 import CopyButton from '@/components/CopyButton'
+
+function FounderCounter() {
+  const [count, setCount] = React.useState<number | null>(null)
+  React.useEffect(() => {
+    fetch('/api/stats/founders').then(r => r.json()).then(d => setCount(d.count))
+  }, [])
+  const n = count ?? 0
+  const pct = Math.min((n / 100) * 100, 100)
+  return (
+    <div style={{ marginBottom:'24px', padding:'16px 20px', background:'rgba(201,169,110,.06)', border:'1px solid rgba(201,169,110,.2)' }}>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' }}>
+        <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--text)' }}>Kurucu Üye Doluluk</span>
+        <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1rem', color:'var(--gold)', fontWeight:500 }}>
+          {count === null ? '—' : n}<span style={{ color:'var(--muted)', fontSize:'.8rem' }}>/100</span>
+        </span>
+      </div>
+      <div style={{ background:'rgba(255,255,255,.06)', borderRadius:'2px', height:'6px', overflow:'hidden' }}>
+        <div style={{ height:'100%', background:'linear-gradient(90deg,var(--gold),#e8c07a)', width:`${pct}%`, transition:'width .6s ease' }} />
+      </div>
+      <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.75rem', color:'var(--muted)', marginTop:'6px' }}>
+        {100 - n} spot kaldı
+      </div>
+    </div>
+  )
+}
 
 const PSY_QUOTES = [
   { text: "Sevgisiz geçen çocukluk yılları, hastalıkların çoğunun kaynağıdır.", author: "Sigmund Freud", field: "Psikanaliz" },
@@ -470,9 +496,12 @@ export default function PsikologPage() {
           <h2 style={{ fontSize:'clamp(2rem,4vw,3.6rem)', fontWeight:400, marginBottom:'20px' }}>
             Türkiye'nin psikoloji <em style={{ fontStyle:'italic', color:'var(--gold)' }}>okulu.</em>
           </h2>
-          <p style={{ fontSize:'1.05rem', color:'var(--text)', marginBottom:'16px', lineHeight:1.8 }}>
+          <p style={{ fontSize:'1.05rem', color:'var(--text)', marginBottom:'24px', lineHeight:1.8 }}>
             İlk 100 psikolog arasına girin. Kurucu üyeler fiyat garantisi, özel rozet ve topluluk kararlarında oy hakkı kazanır.
           </p>
+
+          {/* Kurucu üye sayacı */}
+          <FounderCounter />
 
           {/* Pre-launch bilgi kutusu */}
           <div style={{ background:'rgba(201,169,110,.08)', border:'1px solid rgba(201,169,110,.25)', padding:'16px 20px', marginBottom:'28px', textAlign:'left' }}>
@@ -480,7 +509,7 @@ export default function PsikologPage() {
               <strong style={{ color:'var(--cream)', display:'block', marginBottom:'4px' }}>
                 🎯 &nbsp; Açılıştan sonra 6 ay boyunca aidat yok
               </strong>
-              Şimdi kaydolun, talep toplama sürecine dahil olun. Platform açıldığında size bildirim gönderilecek, ilk 6 ay tamamen ücretsiz çalışacaksınız. İlk 100 kurucu üye olarak fiyat kilidi garantiniz ömür boyu geçerlidir.
+              Şimdi kaydolun, talep toplama sürecine dahil olun. Platform açıldığında size bildirim gönderilecek, ilk 6 ay boyunca hiç aidat ödemezsiniz. İlk 100 kurucu üye olarak fiyat kilidi garantiniz ömür boyu geçerlidir.
             </div>
           </div>
 

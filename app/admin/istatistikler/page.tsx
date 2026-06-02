@@ -91,6 +91,27 @@ export default async function IstatistiklerPage() {
         <StatCard label="Açık Şikayet" value={openComplaints} color="var(--red)" alert />
       </div>
 
+      {/* Kurucu Üye Takibi */}
+      <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.7rem', letterSpacing:'.16em', textTransform:'uppercase', color:'var(--gold-d)', marginBottom:'12px' }}>
+        Kurucu Üye Takibi
+      </div>
+      <div style={{ background:'var(--bg2)', border:'1px solid rgba(201,169,110,.3)', padding:'20px 24px', marginBottom:'28px' }}>
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'12px' }}>
+          <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1rem', color:'var(--cream)' }}>
+            İlk 100 Kurucu Üye
+          </div>
+          <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.4rem', color:'var(--gold)', fontWeight:300 }}>
+            {totalPsy ?? 0}<span style={{ fontSize:'.85rem', color:'var(--muted)' }}>/100</span>
+          </div>
+        </div>
+        <div style={{ background:'var(--bg)', borderRadius:'2px', height:'8px', overflow:'hidden' }}>
+          <div style={{ height:'100%', background:'linear-gradient(90deg, var(--gold), #e8c07a)', width:`${Math.min(((totalPsy ?? 0) / 100) * 100, 100)}%`, transition:'width .5s ease' }} />
+        </div>
+        <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.75rem', color:'var(--muted)', marginTop:'8px' }}>
+          {100 - (totalPsy ?? 0)} spot kaldı · Kurucu üyeler ömür boyu fiyat kilidi alır
+        </div>
+      </div>
+
       {/* Psikologlar */}
       <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.7rem', letterSpacing:'.16em', textTransform:'uppercase', color:'var(--gold-d)', marginBottom:'12px' }}>
         Psikologlar
