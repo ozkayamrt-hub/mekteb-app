@@ -415,13 +415,10 @@ export default function PsikologPage() {
               <div key={p.tier} className="tier-card" style={{ border:`1px solid ${p.featured ? 'rgba(201,169,110,.4)' : 'var(--border)'}`, background: p.featured ? 'var(--bg3)' : 'var(--bg2)', padding:'44px 36px', position:'relative' }}>
                 {p.featured && <div style={{ position:'absolute', top:'-12px', left:'50%', transform:'translateX(-50%)', background:'var(--gold)', color:'#090f0c', fontFamily:'Cormorant Garant,serif', fontSize:'.72rem', fontWeight:600, letterSpacing:'.12em', textTransform:'uppercase', padding:'3px 16px', whiteSpace:'nowrap' }}>Önerilen</div>}
                 <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', letterSpacing:'.14em', textTransform:'uppercase', color: p.featured ? 'var(--gold)' : 'var(--gold-d)', marginBottom:'16px' }}>{p.tier} Üyelik</div>
-                <div style={{ display:'flex', alignItems:'baseline', gap:'4px', marginBottom:'8px' }}>
+                <div style={{ display:'flex', alignItems:'baseline', gap:'4px', marginBottom:'4px' }}>
                   <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'1.2rem', color:'var(--gold)' }}>₺</span>
                   <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'3.4rem', fontWeight:300, color:'var(--cream)', lineHeight:1 }}>0</span>
                   <span style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.85rem', color:'var(--muted)', marginLeft:'4px' }}>/ay</span>
-                </div>
-                <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.82rem', color:'var(--gold-d)', lineHeight:1.6, marginBottom:'8px', borderLeft:'2px solid rgba(201,169,110,.3)', paddingLeft:'10px' }}>
-                  Talep toplamanın ardından danışan kabulü başladıktan sonra <strong style={{ color:'var(--cream)' }}>6 ay boyunca ücretsizdir.</strong>
                 </div>
                 <div style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.78rem', color:'var(--muted)', marginBottom:'22px' }}>
                   Sonrası: {p.price}₺/ay
@@ -439,6 +436,16 @@ export default function PsikologPage() {
                 </Link>
               </div>
             ))}
+          </div>
+          {/* Tüm kartların altında tek açıklama */}
+          <div style={{ marginTop:'28px', padding:'16px 24px', background:'rgba(201,169,110,.06)', border:'1px solid rgba(201,169,110,.2)', maxWidth:'860px', margin:'28px auto 0', textAlign:'center' }}>
+            <p style={{ fontFamily:'Cormorant Garant,serif', fontSize:'.92rem', color:'var(--text)', lineHeight:1.7, margin:0 }}>
+              ✦ &nbsp; Yukarıdaki ücretler <strong style={{ color:'var(--cream)' }}>şu an geçerli değildir.</strong>{' '}
+              Platform talep toplama sürecini tamamlayıp danışan kabulüne başladıktan sonra,{' '}
+              <strong style={{ color:'var(--cream)' }}>tüm üyeler ilk 6 ay boyunca hiç aidat ödemez.</strong>{' '}
+              6. ayın ardından kademenize göre yukarıdaki ücretler uygulanır.{' '}
+              İlk 100 kurucu üyenin fiyat kilidi ömür boyu garantilidir.
+            </p>
           </div>
         </div>
       </section>
